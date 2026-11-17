@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sis-orange-burnt: #BF5700;
+  --sis-orange: #FC800A;
+  --sis-purple: #92278F;
+  --sis-purple-pink: #DD70DA;
+  --sis-green: #8AB326;
+  --sis-navy: #171E45;
+  --sis-cream: #FBF1E3;
+  --sis-warmgray: #EBE8E2;
+  --sis-darkgray: #444444;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--sis-darkgray);
+    background-color: #FFFFFF;
+  }
+
+  body {
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--sis-navy);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #BF5700;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #92278F;
+}
+
+/* Glassmorphism & Cards */
+.card-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(235, 232, 226, 0.8);
+}
+
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
+
+/* GSAP Animated Elements */
+/* Use JS-driven visibility — only hide when JS is confirmed active */
+.gsap-reveal,
+.gsap-card,
+.gsap-fade {
+  will-change: opacity, transform;
+}
+
+/* Only hide when the animation JS has set up (js class added to <html>) */
+.js .gsap-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Fallback: always visible if JS unavailable */
+@media (prefers-reduced-motion: reduce) {
+  .gsap-reveal,
+  .gsap-card,
+  .gsap-fade {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Smooth focus rings for keyboard nav */
+*:focus-visible {
+  outline: 2px solid #BF5700;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(191, 87, 0, 0.18);
+  color: #171E45;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+.line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.line-clamp-3 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+
+/* Print media */
+@media print {
+  .no-print { display: none !important; }
+  header, footer { break-inside: avoid; }
+}
