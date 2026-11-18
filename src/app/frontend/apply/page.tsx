@@ -11,6 +11,7 @@ export default function ApplyPage() {
     gender: "Male",
     dob: "",
     applying_grade: "Play Group",
+    preferred_campus: "Academic Campus 01 (Shantinagar Branch)",
     parent_name: "",
     email: "",
     phone: "",
@@ -37,7 +38,7 @@ export default function ApplyPage() {
           email: formData.email,
           phone: formData.phone,
           subject: `Admission Application: ${formData.student_name} (${formData.applying_grade})`,
-          message: `Applicant: ${formData.student_name}, Gender: ${formData.gender}, DOB: ${formData.dob}, Grade: ${formData.applying_grade}, Prior School: ${formData.current_school}, Hifz Interest: ${formData.hifz_interest}, Address: ${formData.address}`,
+          message: `Applicant: ${formData.student_name}, Gender: ${formData.gender}, DOB: ${formData.dob}, Campus: ${formData.preferred_campus}, Grade: ${formData.applying_grade}, Prior School: ${formData.current_school}, Hifz Interest: ${formData.hifz_interest}, Address: ${formData.address}`,
           website_hp: formData.website_hp,
         }),
       });
@@ -110,7 +111,7 @@ export default function ApplyPage() {
                   Thank you for applying to Spectrum International School. Our admissions officer will contact you within 24 to 48 hours to confirm the assessment date.
                 </p>
                 <div className="pt-2 text-xs text-gray-600">
-                  For immediate queries: +880 1799-369685 / spectrumintlschool@gmail.com
+                  For immediate queries: +88 01799-369685 / +88 01730-369686 / +88 01329-763014 | spectrumintlschool@gmail.com
                 </div>
               </div>
             ) : (
@@ -171,13 +172,26 @@ export default function ApplyPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">Preferred Campus Branch *</label>
+                    <select
+                      value={formData.preferred_campus}
+                      onChange={(e) => setFormData({ ...formData, preferred_campus: e.target.value })}
+                      className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                    >
+                      <option value="Academic Campus 01 (Shantinagar Branch)">Campus 01: Shantinagar Branch</option>
+                      <option value="Academic Campus 02 (Aftabnagar Branch)">Campus 02: Aftabnagar Branch</option>
+                      <option value="Hifzul Quran Campus (Residential Building, Shantinagar)">Hifzul Quran Campus (Shantinagar)</option>
+                    </select>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-bold text-gray-700 mb-1">Grade Applying For *</label>
                     <select
                       value={formData.applying_grade}
                       onChange={(e) => setFormData({ ...formData, applying_grade: e.target.value })}
-                      className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                      className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
                     >
                       <option value="Play Group">Play Group</option>
                       <option value="Nursery">Nursery</option>
@@ -204,7 +218,7 @@ export default function ApplyPage() {
                     <select
                       value={formData.hifz_interest}
                       onChange={(e) => setFormData({ ...formData, hifz_interest: e.target.value })}
-                      className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                      className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
                     >
                       <option value="No">No - General Cambridge Curriculum Only</option>
                       <option value="Yes - Full Hifz">Yes - Full Tahfeezul Quran Wing</option>

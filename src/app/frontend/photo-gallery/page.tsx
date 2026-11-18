@@ -3,8 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import PageBanner from "@/components/PageBanner";
+import DriftWall from "@/components/DriftWall";
 import { ASSETS } from "@/lib/assets";
 import { X, ZoomIn } from "lucide-react";
+
+const wallItems = ASSETS.gallery.map((p) => ({ image: p.src, title: p.title, href: undefined }));
 
 const albums = [
   { id: "all", label: "All Photos" },
@@ -33,6 +36,30 @@ export default function PhotoGalleryPage() {
         breadcrumbs={[{ label: "Media & Publication", href: "/frontend/blogs" }, { label: "Photo Gallery" }]}
         bgImage={ASSETS.hero.banner1}
       />
+
+      <section className="bg-[#171E45] py-6" aria-label="Photo showcase">
+        <div className="h-[420px] md:h-[560px] max-w-7xl mx-auto">
+          <DriftWall
+            items={wallItems}
+            columns={5}
+            tileWidth={200}
+            tileHeight={132}
+            gap={18}
+            tilt={16}
+            turn={-14}
+            perspective={1200}
+            depth={120}
+            speed={42}
+            direction="up"
+            variance={0.45}
+            parallax={0.6}
+            lift={64}
+            fade={0.45}
+            dim={0.85}
+            overlayColor="#060010"
+          />
+        </div>
+      </section>
 
       <div className="section-padding bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 space-y-10">

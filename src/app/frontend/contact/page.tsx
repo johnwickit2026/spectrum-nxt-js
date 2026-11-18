@@ -3,7 +3,7 @@
 import { useState } from "react";
 import PageBanner from "@/components/PageBanner";
 import { ASSETS } from "@/lib/assets";
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle, Building2, Facebook, Instagram, Youtube, Globe } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -54,24 +54,86 @@ export default function ContactPage() {
       <PageBanner
         title="Contact Us"
         badge="Get In Touch"
-        subtitle="We invite you to reach out, visit our Shantinagar campus, or connect with our admissions counselors."
+        subtitle="We invite you to reach out, visit our campuses across Dhaka, or connect with our admissions counselors."
         breadcrumbs={[{ label: "About Us", href: "/frontend/aboutus" }, { label: "Contact Us" }]}
         bgImage={ASSETS.campus.building}
       />
 
       <div className="section-padding bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
+          {/* Top Campus Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-[#BF5700] border-x border-b border-gray-100 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-bold text-[#BF5700] uppercase tracking-wider block mb-1">
+                  Academic Campus 01
+                </span>
+                <h3 className="text-lg font-bold text-[#171E45]">Shantinagar Branch</h3>
+                <p className="text-xs text-gray-600 mt-2">41/1, Shantinagar, Dhaka</p>
+              </div>
+              <div className="pt-4 border-t border-gray-100 mt-4 text-xs">
+                <p className="text-gray-500 font-medium">Contact Numbers:</p>
+                <p className="font-semibold text-[#BF5700] mt-0.5">+88 01799-369685</p>
+                <p className="font-semibold text-[#BF5700]">+88 01730-369686</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-[#92278F] border-x border-b border-gray-100 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-bold text-[#92278F] uppercase tracking-wider block mb-1">
+                  Academic Campus 02
+                </span>
+                <h3 className="text-lg font-bold text-[#171E45]">Aftabnagar Branch</h3>
+                <p className="text-xs text-gray-600 mt-2">House 28, Main Road, Block-D, Sector-2, Aftabnagar, Dhaka</p>
+              </div>
+              <div className="pt-4 border-t border-gray-100 mt-4 text-xs">
+                <p className="text-gray-500 font-medium">Contact Numbers:</p>
+                <p className="font-semibold text-[#92278F] mt-0.5">+88 01329-763014</p>
+                <p className="font-semibold text-[#92278F]">+88 01329-763015</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-[#8AB326] border-x border-b border-gray-100 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-bold text-[#8AB326] uppercase tracking-wider block mb-1">
+                  Hifzul Quran Campus
+                </span>
+                <h3 className="text-lg font-bold text-[#171E45]">Residential Building</h3>
+                <p className="text-xs text-gray-600 mt-2">41/1 (Bhaban-02), Shantinagar, Dhaka</p>
+              </div>
+              <div className="pt-4 border-t border-gray-100 mt-4 text-xs">
+                <p className="text-gray-500 font-medium">Contact Numbers:</p>
+                <p className="font-semibold text-[#8AB326] mt-0.5">+88 01712-270559</p>
+                <p className="font-semibold text-[#8AB326]">+88 01818-314269</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-yellow-500 border-x border-b border-gray-100 flex flex-col justify-between">
+              <div>
+                <span className="text-[11px] font-bold text-yellow-600 uppercase tracking-wider block mb-1">
+                  Proposed Permanent Campus
+                </span>
+                <h3 className="text-lg font-bold text-[#171E45]">Savar Campus</h3>
+                <p className="text-xs text-gray-600 mt-2">Vakurta (Near Amin Bazar), Savar</p>
+              </div>
+              <div className="pt-4 border-t border-gray-100 mt-4 text-xs">
+                <p className="text-gray-500 font-medium">Contact Number:</p>
+                <p className="font-semibold text-yellow-700 mt-0.5">+88 01726-208154</p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Contact Details Card */}
             <div className="lg:col-span-5 space-y-6">
               <div className="bg-[#171E45] text-white rounded-3xl p-8 sm:p-10 shadow-card space-y-6">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#FC800A]">
-                    Campus Location
+                    Central Administration
                   </span>
-                  <h3 className="text-2xl font-black mt-1">Visit Spectrum Campus</h3>
+                  <h3 className="text-2xl font-black mt-1">Spectrum International School</h3>
                   <p className="text-xs text-gray-300 mt-2 leading-relaxed">
-                    Our campus is conveniently situated in Shantinagar, Dhaka, close to Kakrail, Bailey Road, and Malibagh.
+                    &ldquo;Shaping Bright Minds, Building Better Future&rdquo;
                   </p>
                 </div>
 
@@ -79,27 +141,30 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-[#FC800A] shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-bold text-white">Campus Address</p>
-                      <p className="text-gray-300">Khadem Tower, 41/1 Shantinagar, Dhaka 1217, Bangladesh</p>
+                      <p className="font-bold text-white">Central Campus Address</p>
+                      <p className="text-gray-300">41/1, Shantinagar, Dhaka, Bangladesh</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
                     <Phone className="w-5 h-5 text-[#FC800A] shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-bold text-white">Telephone & Mobiles</p>
-                      <p className="text-gray-300">+880 1799-369685 (Admissions Desk)</p>
-                      <p className="text-gray-300">+880 1730-369686 (Accounts & General)</p>
-                      <p className="text-gray-400">Landline: 0248318285</p>
+                      <p className="font-bold text-white">Hotline & Admissions Desk</p>
+                      <p className="text-gray-300">+88 01799-369685 / +88 01730-369686</p>
+                      <p className="text-gray-300">Aftabnagar: +88 01329-763014 / +88 01329-763015</p>
+                      <p className="text-gray-300">Hifz Campus: +88 01712-270559 / +88 01818-314269</p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
                     <Mail className="w-5 h-5 text-[#FC800A] shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-bold text-white">Official Email</p>
-                      <a href="mailto:spectrumintlschool@gmail.com" className="text-orange-300 hover:underline">
+                      <p className="font-bold text-white">Official Email & Web</p>
+                      <a href="mailto:spectrumintlschool@gmail.com" className="text-orange-300 hover:underline block">
                         spectrumintlschool@gmail.com
+                      </a>
+                      <a href="https://www.spectrumintlschool.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:underline block mt-0.5">
+                        www.spectrumintlschool.com
                       </a>
                     </div>
                   </div>
@@ -113,13 +178,47 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
+
+                {/* Social Links Box */}
+                <div className="pt-4 border-t border-gray-700 space-y-2">
+                  <p className="text-xs font-bold text-orange-200">Connect On Social Channels</p>
+                  <div className="flex flex-wrap gap-3 text-xs">
+                    <a
+                      href="https://facebook.com/spectruminternationalschool.dhaka"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg flex items-center gap-1.5 transition-colors"
+                    >
+                      <Facebook className="w-3.5 h-3.5 text-[#FC800A]" />
+                      <span>Facebook</span>
+                    </a>
+                    <a
+                      href="https://instagram.com/sis.dhaka"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg flex items-center gap-1.5 transition-colors"
+                    >
+                      <Instagram className="w-3.5 h-3.5 text-[#DD70DA]" />
+                      <span>Instagram</span>
+                    </a>
+                    <a
+                      href="https://youtube.com/@SpectrumTVBD"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg flex items-center gap-1.5 transition-colors"
+                    >
+                      <Youtube className="w-3.5 h-3.5 text-red-400" />
+                      <span>Spectrum TV BD</span>
+                    </a>
+                  </div>
+                </div>
               </div>
 
               {/* Map Container */}
               <div className="rounded-3xl overflow-hidden shadow-card border border-gray-200 h-64 bg-gray-200 relative">
                 <iframe
                   title="Spectrum International School Location"
-                  src="https://maps.google.com/maps?q=Khadem+Tower,+41/1+Shantinagar,+Dhaka+1217&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  src="https://maps.google.com/maps?q=41/1+Shantinagar,+Dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -221,9 +320,10 @@ export default function ContactPage() {
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
                       >
-                        <option value="Admission Inquiry">Admission Inquiry</option>
+                        <option value="Admission Inquiry - Shantinagar Branch">Admission Inquiry - Shantinagar Branch</option>
+                        <option value="Admission Inquiry - Aftabnagar Branch">Admission Inquiry - Aftabnagar Branch</option>
+                        <option value="Hifzul Quran Program (Residential Campus)">Hifzul Quran Program (Residential Campus)</option>
                         <option value="Cambridge O/A Level Details">Cambridge O/A Level Details</option>
-                        <option value="Hifzul Quran Program">Hifzul Quran Program</option>
                         <option value="Tuition Fee & Accounts">Tuition Fee & Accounts</option>
                         <option value="Campus Visit Request">Campus Visit Request</option>
                         <option value="General Inquiry">General Inquiry</option>

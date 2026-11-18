@@ -1,24 +1,24 @@
 import Link from "next/link";
-import { Phone, Mail, Clock, Facebook, Youtube, Linkedin, CreditCard } from "lucide-react";
+import { Phone, Mail, Clock, Facebook, Youtube, Instagram, CreditCard } from "lucide-react";
 
 export default function TopContactBar() {
   return (
     <div className="bg-[#BF5700] text-white text-xs py-2 px-4 border-b border-[#a84d00] transition-colors">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-2">
         {/* Contact Numbers & Email */}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
           <div className="flex items-center gap-1.5">
             <Phone className="w-3.5 h-3.5 text-orange-200" />
             <a href="tel:+8801799369685" className="hover:text-orange-200 transition-colors font-medium">
-              +880 1799-369685
+              +88 01799-369685
             </a>
             <span className="text-orange-300">|</span>
             <a href="tel:+8801730369686" className="hover:text-orange-200 transition-colors font-medium">
-              +880 1730-369686
+              +88 01730-369686
             </a>
             <span className="text-orange-300">|</span>
-            <a href="tel:0248318285" className="hover:text-orange-200 transition-colors hidden sm:inline">
-              0248318285
+            <a href="tel:+8801329763014" className="hover:text-orange-200 transition-colors hidden lg:inline font-medium" title="Aftabnagar Branch">
+              Aftabnagar: +88 01329-763014
             </a>
           </div>
 
@@ -47,7 +47,7 @@ export default function TopContactBar() {
 
           <div className="flex items-center gap-2 pl-2 border-l border-orange-400/40">
             <a
-              href="https://www.facebook.com/spectrumintlschool"
+              href="https://facebook.com/spectruminternationalschool.dhaka"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="SIS Facebook"
@@ -56,22 +56,22 @@ export default function TopContactBar() {
               <Facebook className="w-3.5 h-3.5" />
             </a>
             <a
-              href="https://www.youtube.com/@spectrumintlschool"
+              href="https://instagram.com/sis.dhaka"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="SIS YouTube"
+              aria-label="SIS Instagram"
+              className="text-white hover:text-orange-200 transition-colors"
+            >
+              <Instagram className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://youtube.com/@SpectrumTVBD"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Spectrum TV BD YouTube"
               className="text-white hover:text-orange-200 transition-colors"
             >
               <Youtube className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/school/spectrum-international-school-bd"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="SIS LinkedIn"
-              className="text-white hover:text-orange-200 transition-colors"
-            >
-              <Linkedin className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>

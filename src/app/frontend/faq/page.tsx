@@ -28,8 +28,8 @@ const faqs = [
     a: "Yes. SIS offers merit-based academic waivers for stellar board exam results, sibling discounts, and need-based financial scholarships through the SIS Board of Trustees. Parents can apply via the Waiver form.",
   },
   {
-    q: "Where is the main campus located?",
-    a: "Our central campus is located at Khadem Tower, 41/1 Shantinagar, Dhaka 1217, Bangladesh. It features 24/7 security, elevator access, fully air-conditioned multimedia classrooms, and dedicated STEM/ICT laboratories.",
+    q: "Where are the Spectrum International School campuses located?",
+    a: "Spectrum International School operates four campuses: Academic Campus 01 (Shantinagar Branch at 41/1, Shantinagar, Dhaka; Tel: +88 01799-369685 / +88 01730-369686), Academic Campus 02 (Aftabnagar Branch at House 28, Main Road, Block-D, Sector-2, Aftabnagar; Tel: +88 01329-763014 / +88 01329-763015), Hifzul Quran Residential Campus (41/1 Bhaban-02, Shantinagar; Tel: +88 01712-270559 / +88 01818-314269), and our Proposed Permanent Campus at Vakurta, Savar (Tel: +88 01726-208154).",
   },
 ];
 

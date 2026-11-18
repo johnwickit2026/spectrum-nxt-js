@@ -6,7 +6,7 @@ import { Calendar, Mail, Phone, Quote, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Founder & CEO | Spectrum International School",
-  description: "Message and vision from Nur Ahammed Khokan, Founder & CEO of Spectrum International School.",
+  description: "Message and vision from Nur Ahammed, Founder & CEO of Spectrum International School.",
 };
 
 export default function CeoPage() {
@@ -15,7 +15,7 @@ export default function CeoPage() {
       <PageBanner
         title="Founder & CEO"
         badge="School Leadership"
-        subtitle="Nur Ahammed Khokan on the founding vision, progressive pedagogy, and values shaping Spectrum International School."
+        subtitle="Nur Ahammed on the founding vision, progressive pedagogy, and values shaping Spectrum International School."
         breadcrumbs={[{ label: "About Us", href: "/frontend/aboutus" }, { label: "Founder & CEO" }]}
         bgImage={ASSETS.hero.banner2}
       />
@@ -28,13 +28,13 @@ export default function CeoPage() {
               <div className="relative w-48 h-48 mx-auto rounded-2xl overflow-hidden shadow-lg border-4 border-white">
                 <Image
                   src={ASSETS.people.founderCeo}
-                  alt="Nur Ahammed Khokan, Founder & CEO"
+                  alt="Nur Ahammed, Founder & CEO"
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-extrabold text-[#171E45]">Nur Ahammed Khokan</h3>
+                <h3 className="text-xl font-extrabold text-[#171E45]">Nur Ahammed</h3>
                 <p className="text-xs font-bold text-[#BF5700] uppercase tracking-wider mt-1">Founder & CEO</p>
                 <p className="text-xs text-gray-600 mt-2">Spectrum International School & EduCare Group</p>
               </div>
@@ -46,7 +46,7 @@ export default function CeoPage() {
                 </div>
                 <div className="flex items-center gap-2 text-gray-700">
                   <Phone className="w-3.5 h-3.5 text-[#BF5700]" />
-                  <span>+880 1799-369685</span>
+                  <span>+88 01799-369685 / +88 01730-369686</span>
                 </div>
               </div>
 
@@ -64,29 +64,47 @@ export default function CeoPage() {
             {/* Address & Narrative */}
             <div className="md:col-span-7 space-y-6">
               <div className="border-l-4 border-[#BF5700] pl-4 italic text-sm text-gray-700 bg-orange-50/50 py-3 rounded-r-lg">
-                &ldquo;True leadership in education is measured not merely by grades on an exam sheet, but by the integrity, empathy, and resilience our graduates bring into the world.&rdquo;
+                &ldquo;Meaningful reform begins with the knowledge we impart, the values we nurture and the example we set.&rdquo;
               </div>
 
               <h2 className="text-2xl font-black text-[#171E45]">
-                Welcome from the Founder & Chief Executive Officer
+                Message from the Founder & CEO
               </h2>
 
-              <p className="text-sm text-gray-700 leading-relaxed">
-                Bismillahir Rahmanir Raheem.
+              <p className="text-xs font-bold text-gray-600 tracking-wider uppercase">
+                Bismillahir Rahmanir Raheem
               </p>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                It gives me immense honor to welcome prospective parents, students, and educators to Spectrum International School. When we laid the cornerstone of Spectrum, we were guided by a conviction that has only deepened with time: Bangladeshi children deserve the finest British curriculum instruction without having to surrender their cultural identity, mother tongue, or Islamic faith.
-              </p>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                Over the years, our campus in Shantinagar has blossomed into an energetic center of learning. Our students engage in inquiry-driven science, computational robotics, creative arts, and sports meets, while their days begin with the recitation of the Holy Quran and gratitude to the Almighty.
-              </p>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                We believe in an open-door policy. As parents, you are our co-educators. We invite you to walk our halls, observe our teachers in action, and experience firsthand what makes Spectrum International School a home for the heart and mind.
-              </p>
+
+              <div className="text-sm text-gray-700 leading-relaxed space-y-4">
+                <p className="font-semibold text-[#171E45]">
+                  Dear Parents and Guardians,<br />
+                  Assalamu Alaikum wa Rahmatullah.
+                </p>
+
+                <p>
+                  Every child we educate will one day help shape the society we live in. I believe that meaningful reform begins with the knowledge we impart, the values we nurture and the example we set.
+                </p>
+
+                <p>
+                  The first Qur&apos;anic revelation began with the command &ldquo;Read.&rdquo; This call to seek knowledge inspires our purpose at Spectrum International School: to bring Islamic education and modern education together in a balanced foundation for life.
+                </p>
+
+                <p>
+                  We want our children to ask thoughtful questions, pursue excellence and remain firmly grounded in faith. We want them to practise honesty when it is difficult, show compassion when others turn away and take responsibility when their communities need them.
+                </p>
+
+                <p>
+                  Our hope is that students will leave school with more than qualifications. They will carry the knowledge, values and courage to stand against wrongdoing, serve their communities and build a better tomorrow.
+                </p>
+
+                <p>
+                  With your trust and partnership, we can nurture a generation prepared to fulfil this responsibility, In Shaa Allah.
+                </p>
+              </div>
 
               <div className="pt-4 flex items-center justify-between border-t border-gray-100">
                 <div>
-                  <p className="font-serif italic font-bold text-lg text-[#171E45]">Nur Ahammed Khokan</p>
+                  <p className="font-serif italic font-bold text-lg text-[#171E45]">Nur Ahammed</p>
                   <p className="text-xs text-gray-500">Founder & CEO, Spectrum International School</p>
                 </div>
                 <Link

@@ -31,7 +31,7 @@ export default function HomePage() {
   const [stats, setStats] = useState({
     students: "800+",
     teachers: "110+",
-    campuses: "2",
+    campuses: "4",
     passRate: "100%",
   });
 
@@ -143,7 +143,7 @@ export default function HomePage() {
             </h1>
 
             <p className="hero-desc text-base sm:text-lg text-gray-200 font-normal leading-relaxed max-w-2xl">
-              An internationally recognized English-medium institution in Shantinagar, Dhaka. Offering Pearson Edexcel and Cambridge qualifications integrated seamlessly with Tahfeezul Quran and holistic character building.
+              Established in 2020. An internationally recognized English-medium institution with campuses in Shantinagar and Aftabnagar, Dhaka. Offering Pearson Edexcel and Cambridge curricula integrated seamlessly with Hifzul Qur’an and holistic character building.
             </p>
 
             <div className="hero-cta flex flex-wrap items-center gap-4 pt-2">
@@ -357,7 +357,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-[#171E45] mb-3">Our Vision</h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                To nurture enlightened, ethically grounded global citizens equipped with international academic excellence, high moral character, and lifelong curiosity to serve humanity positively.
+                Our vision is to nurture a generation grounded in faith, knowledge and noble character, prepared to excel in life, serve humanity and contribute to the betterment of our country while fulfilling their responsibilities to Allah.
               </p>
             </div>
 
@@ -368,7 +368,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-[#171E45] mb-3">Our Mission</h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                To deliver a balanced, rigorous British curriculum alongside profound Islamic values, empowering every learner to excel in analytical reasoning, linguistic mastery, and spiritual integrity.
+                We are committed to fostering both ethical and educational excellence, believing that strong moral values and academic achievement are essential for shaping future leaders who contribute positively to society.
               </p>
             </div>
 
@@ -379,7 +379,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-[#171E45] mb-3">Our Philosophy</h3>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                Every child is a unique amanah (trust). We cultivate their potential through empathy, active inquiry, play-infused foundational learning, and structured mentor-led guidance.
+                With a comprehensive blend of Islamic, academic, cultural, psychological, social, physical, and health requirements, Spectrum aims to promote and maintain the growth of positive, well-rounded Muslim children.
               </p>
             </div>
           </div>
@@ -608,7 +608,7 @@ export default function HomePage() {
                     className="object-cover"
                   />
                 </div>
-                <h4 className="text-lg font-extrabold text-[#171E45]">Nur Ahammed Khokan</h4>
+                <h4 className="text-lg font-extrabold text-[#171E45]">Nur Ahammed</h4>
                 <p className="text-xs font-semibold text-[#BF5700]">Founder & Chief Executive Officer</p>
                 <p className="text-[11px] text-gray-500 mt-1">Spectrum International School</p>
               </div>
@@ -618,13 +618,13 @@ export default function HomePage() {
                   Leadership Address
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-[#171E45] leading-snug">
-                  &ldquo;Nurturing a Generation of Confident Thinkers Anchored in Unshakable Faith&rdquo;
+                  &ldquo;Meaningful Reform Begins with the Knowledge We Impart&rdquo;
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                  Welcome to Spectrum International School. Our commitment from day one has been to dissolve the false divide between international academic standard and Islamic moral values. Our students conquer Pearson Edexcel and Cambridge examinations with stellar results, while their hearts resonate with the timeless wisdom of the Holy Quran and ethical character.
+                  Every child we educate will one day help shape the society we live in. I believe that meaningful reform begins with the knowledge we impart, the values we nurture and the example we set. The first Qur’anic revelation began with the command &ldquo;Read.&rdquo; This call to seek knowledge inspires our purpose at Spectrum International School: to bring Islamic education and modern education together in a balanced foundation for life.
                 </p>
                 <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                  We look forward to welcoming your family into our community, where your child&apos;s dignity, intellect, and future are cherished every single day.
+                  We want our children to ask thoughtful questions, pursue excellence and remain firmly grounded in faith, carrying the courage to build a better tomorrow.
                 </p>
 
                 <div className="pt-2 flex items-center gap-4">
@@ -984,13 +984,13 @@ export default function HomePage() {
             <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-yellow-400/50 transition-all">
               <p
                 className="stat-counter text-3xl sm:text-4xl font-black text-yellow-400"
-                data-target="2"
+                data-target="4"
                 data-suffix=""
               >
-                2
+                4
               </p>
-              <p className="text-xs text-gray-300 font-semibold mt-2">Modern Campuses</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">Khadem Tower, Dhaka</p>
+              <p className="text-xs text-gray-300 font-semibold mt-2">Campuses / Sites</p>
+              <p className="text-[10px] text-gray-400 mt-0.5">Shantinagar, Aftabnagar, Savar</p>
             </div>
 
             <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-orange-400/50 transition-all">
@@ -1008,13 +1008,13 @@ export default function HomePage() {
             <div className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-purple-300/50 transition-all">
               <p
                 className="stat-counter text-3xl sm:text-4xl font-black text-purple-300"
-                data-target="150"
-                data-suffix="+"
+                data-target="8"
+                data-suffix=""
               >
-                150+
+                8
               </p>
-              <p className="text-xs text-gray-300 font-semibold mt-2">Huffaz Groomed</p>
-              <p className="text-[10px] text-gray-400 mt-0.5">Certified Tajweed</p>
+              <p className="text-xs text-gray-300 font-semibold mt-2">Completed Hafez</p>
+              <p className="text-[10px] text-gray-400 mt-0.5">Blessed Milestone</p>
             </div>
           </div>
         </div>
@@ -1072,7 +1072,7 @@ export default function HomePage() {
           </div>
 
           <div className="pt-4 text-xs text-orange-100">
-            Helpline: +880 1799-369685 / +880 1730-369686 | Khadem Tower, 41/1 Shantinagar, Dhaka 1217
+            Helpline: +88 01799-369685 / +88 01730-369686 | Aftabnagar: +88 01329-763014 | Hifz: +88 01712-270559 | 41/1, Shantinagar, Dhaka
           </div>
         </div>
       </section>

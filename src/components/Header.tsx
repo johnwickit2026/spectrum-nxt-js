@@ -122,7 +122,7 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-        {/* Logo and Affiliations */}
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-44 md:w-56 h-12 flex items-center">
             <Image
@@ -133,16 +133,6 @@ export default function Header() {
               priority
               style={{ width: "auto", height: "auto" }}
               className="object-contain max-h-12"
-            />
-          </div>
-          <div className="hidden lg:block border-l border-gray-200 pl-3">
-            <Image
-              src="/images/affiliation-logo.png"
-              alt="Affiliations: British Council, Pearson Edexcel, Cambridge"
-              width={110}
-              height={36}
-              style={{ width: "auto", height: "auto" }}
-              className="object-contain max-h-9 opacity-90 group-hover:opacity-100 transition-opacity"
             />
           </div>
         </Link>
@@ -301,7 +291,7 @@ export default function Header() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <div className="text-center text-xs text-gray-500 mt-4">
-              Khadem Tower, 41/1 Shantinagar, Dhaka 1217
+              Campuses: Shantinagar & Aftabnagar, Dhaka
             </div>
           </div>
         </div>

@@ -61,7 +61,7 @@ export default function RootLayout({
       "postalCode": "1217",
       "addressCountry": "BD"
     },
-    "telephone": ["+880 1799-369685", "+880 1730-369686", "0248318285"],
+    "telephone": ["+88 01799-369685", "+88 01730-369686", "+88 01329-763014"],
     "email": "spectrumintlschool@gmail.com",
     "curriculum": ["Pearson Edexcel", "Cambridge International", "Tahfeezul Quran"],
     "openingHoursSpecification": {

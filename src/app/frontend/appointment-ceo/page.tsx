@@ -60,7 +60,7 @@ export default function AppointmentCeoPage() {
       <PageBanner
         title="Appointment with CEO"
         badge="Executive Secretariat"
-        subtitle="Schedule a consultation with Nur Ahammed Khokan, Founder & CEO of Spectrum International School."
+        subtitle="Schedule a consultation with Nur Ahammed, Founder & CEO of Spectrum International School."
         breadcrumbs={[{ label: "About Us", href: "/frontend/aboutus" }, { label: "Appointment with CEO" }]}
         bgImage={ASSETS.hero.banner2}
       />

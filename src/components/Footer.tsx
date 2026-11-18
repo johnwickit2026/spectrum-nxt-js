@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck, ExternalLink } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck, ExternalLink, Facebook, Instagram, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -21,18 +21,25 @@ export default function Footer() {
               />
             </div>
             <p className="text-gray-300 text-xs leading-relaxed">
-              Spectrum International School is an esteemed English-medium institution in Shantinagar, Dhaka, combining Pearson Edexcel and Cambridge curriculum rigor with moral values and Tahfeezul Quran.
+              Spectrum International School is an esteemed English-medium institution established in 2020, combining Pearson Edexcel and Cambridge curriculum rigor with Islamic moral values and Hifzul Quran.
             </p>
-            <div className="pt-2 space-y-2 text-xs text-gray-300">
+            <p className="text-[#FC800A] text-xs font-semibold italic">
+              &ldquo;Shaping Bright Minds, Building Better Future&rdquo;
+            </p>
+            <div className="pt-1 space-y-2 text-xs text-gray-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#FC800A] shrink-0 mt-0.5" />
-                <span>Khadem Tower, 41/1 Shantinagar, Dhaka 1217, Bangladesh</span>
+                <span><strong>Campus 01:</strong> 41/1, Shantinagar, Dhaka</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#FC800A] shrink-0 mt-0.5" />
+                <span><strong>Campus 02:</strong> House 28, Main Rd, Block-D, Sec-2, Aftabnagar, Dhaka</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#FC800A] shrink-0" />
                 <div className="flex flex-col">
-                  <span>+880 1799-369685 / +880 1730-369686</span>
-                  <span className="text-gray-400">Tel: 0248318285</span>
+                  <span>+88 01799-369685 / +88 01730-369686</span>
+                  <span className="text-gray-400">Aftabnagar: +88 01329-763014 / 15</span>
                 </div>
               </div>
               <div className="flex items-center gap-2.5">
@@ -201,9 +208,69 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Campuses & Social Hub */}
+        <div className="py-8 border-b border-gray-700/60 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs text-gray-300">
+          <div className="bg-[#1b234f] p-4 rounded-xl border border-gray-700/50">
+            <span className="text-[#FC800A] font-bold block mb-1">Academic Campus 01</span>
+            <p className="font-semibold text-white">Shantinagar Branch</p>
+            <p className="text-gray-400 mt-1">41/1, Shantinagar, Dhaka</p>
+            <p className="text-orange-200 mt-2 font-mono text-[11px]">+88 01799-369685 | +88 01730-369686</p>
+          </div>
+
+          <div className="bg-[#1b234f] p-4 rounded-xl border border-gray-700/50">
+            <span className="text-[#DD70DA] font-bold block mb-1">Academic Campus 02</span>
+            <p className="font-semibold text-white">Aftabnagar Branch</p>
+            <p className="text-gray-400 mt-1">House 28, Main Road, Block-D, Sector-2, Aftabnagar, Dhaka</p>
+            <p className="text-orange-200 mt-2 font-mono text-[11px]">+88 01329-763014 | +88 01329-763015</p>
+          </div>
+
+          <div className="bg-[#1b234f] p-4 rounded-xl border border-gray-700/50">
+            <span className="text-[#8AB326] font-bold block mb-1">Hifzul Quran Campus</span>
+            <p className="font-semibold text-white">Residential Building</p>
+            <p className="text-gray-400 mt-1">41/1 (Bhaban-02), Shantinagar, Dhaka</p>
+            <p className="text-orange-200 mt-2 font-mono text-[11px]">+88 01712-270559 | +88 01818-314269</p>
+          </div>
+
+          <div className="bg-[#1b234f] p-4 rounded-xl border border-gray-700/50">
+            <span className="text-yellow-400 font-bold block mb-1">Proposed Permanent Campus</span>
+            <p className="font-semibold text-white">Savar Campus</p>
+            <p className="text-gray-400 mt-1">Vakurta (Near Amin Bazar), Savar</p>
+            <p className="text-orange-200 mt-2 font-mono text-[11px]">+88 01726-208154</p>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-4">
           <p>© {new Date().getFullYear()} Spectrum International School (SIS). All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://facebook.com/spectruminternationalschool.dhaka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+            >
+              <Facebook className="w-3.5 h-3.5 text-[#FC800A]" />
+              <span>Facebook</span>
+            </a>
+            <a
+              href="https://instagram.com/sis.dhaka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+            >
+              <Instagram className="w-3.5 h-3.5 text-[#DD70DA]" />
+              <span>Instagram</span>
+            </a>
+            <a
+              href="https://youtube.com/@SpectrumTVBD"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+            >
+              <Youtube className="w-3.5 h-3.5 text-red-400" />
+              <span>Spectrum TV BD</span>
+            </a>
+          </div>
           <div className="flex items-center gap-6">
             <Link href="/frontend/faq" className="hover:text-white transition-colors">FAQ</Link>
             <Link href="/frontend/career" className="hover:text-white transition-colors">Careers</Link>
