@@ -41,7 +41,7 @@ const nonAcademicStaff = [
   },
   {
     name: "Fakhrul Hossain Aman",
-    role: "Senior Executive Officer (Admission & Admin Coordinator)",
+    role: "Senior Executive Officer (Admission and Admin Coordinator)",
     department: "Admissions & Admin",
     image: ASSETS.people.faculty,
   },
@@ -95,7 +95,7 @@ const nonAcademicStaff = [
   },
   {
     name: "Mohammed Kaizer Siddiquee",
-    role: "Security In charge",
+    role: "Security In charge.",
     department: "Campus Safety & Security",
     image: ASSETS.people.teachersStaff,
   },
@@ -178,6 +178,20 @@ export default function NonAcademicTeamPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Published Roster Reference Notice */}
+          <div className="mt-12 p-6 bg-purple-50/70 border border-purple-200/80 rounded-2xl text-xs text-purple-950 leading-relaxed space-y-2">
+            <p className="font-bold flex items-center gap-2 text-purple-900">
+              <span className="w-2 h-2 rounded-full bg-[#92278F] inline-block"></span>
+              Official Published Roster Information
+            </p>
+            <p>
+              This directory reproduces the official published names and designations from the Spectrum International School Non-Academic Staff directory.
+            </p>
+            <p className="text-[11px] text-purple-800/90">
+              Note: Listed as &ldquo;Nur Ahammed&rdquo; (CEO &amp; Founder) and &ldquo;Sharmin Akter Eva&rdquo; (Vice-Principal) in the school&apos;s Non-Academic Staff directory, and as &ldquo;Nur Ahammed Khokan&rdquo; (Founder &amp; CEO) and &ldquo;Sharmin Akter Eva&rdquo; (Vice Principal &amp; Academic Head) in executive leadership messages.
+            </p>
           </div>
         </div>
       </div>

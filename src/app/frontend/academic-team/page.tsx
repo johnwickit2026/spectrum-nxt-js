@@ -78,7 +78,7 @@ const academicTeamData: Teacher[] = [
   { name: "Hozaefa Bilkis Liza", role: "Teacher", category: "Faculty & Teachers", image: ASSETS.people.faculty },
   { name: "Sumaiya Meem", role: "Teacher", category: "Faculty & Teachers", image: ASSETS.people.faculty },
   { name: "Faysal Hossain Noman", role: "Teacher", category: "Faculty & Teachers", image: ASSETS.people.teachersStaff },
-  { name: "Atika Ashek", role: "Assistant Teacher & Pediatric Healthcare Staff", category: "Faculty & Teachers", image: ASSETS.people.faculty },
+  { name: "Atika Ashek", role: "Assistant Teacher and Pediatric Healthcare Staff", category: "Faculty & Teachers", image: ASSETS.people.faculty },
   { name: "Tasmia Ahmed", role: "Teacher", category: "Faculty & Teachers", image: ASSETS.people.faculty },
   { name: "Afroza Akter", role: "Teacher", category: "Faculty & Teachers", image: ASSETS.people.faculty },
   { name: "Mohammad Khan Shamim", role: "Teacher", category: "Faculty & Teachers", image: ASSETS.people.teachersStaff },
@@ -199,6 +199,20 @@ export default function AcademicTeamPage() {
               No faculty members found matching &quot;{searchQuery}&quot;.
             </div>
           )}
+
+          {/* Published Roster Reference Notice */}
+          <div className="mt-12 p-6 bg-amber-50/70 border border-amber-200/80 rounded-2xl text-xs text-amber-900 leading-relaxed space-y-2">
+            <p className="font-bold text-amber-950 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-amber-500 inline-block"></span>
+              Official Published Roster Information
+            </p>
+            <p>
+              This directory reproduces the official 70 named teachers, lead preceptors, coordinators, and Quran faculty members published on the Spectrum International School Teachers directory, alongside Academic Head Sharmin Akter Eva.
+            </p>
+            <p className="text-[11px] text-amber-800/90">
+              Note: The school&apos;s published records also list an Afroza Akter under the campus Support Team directory; names and published designations are reproduced as officially listed.
+            </p>
+          </div>
         </div>
       </div>
     </div>

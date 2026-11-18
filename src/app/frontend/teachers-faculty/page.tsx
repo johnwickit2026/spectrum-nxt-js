@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import PageBanner from "@/components/PageBanner";
 import { ASSETS } from "@/lib/assets";
-import { GraduationCap, Award, BookOpen } from "lucide-react";
+import { GraduationCap, Award, BookOpen, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Teachers & Faculty | Spectrum International School",
@@ -35,6 +36,15 @@ export default function TeachersFacultyPage() {
               <p className="text-sm text-gray-700 leading-relaxed">
                 With a low student-to-teacher ratio (average 1:15), every child receives individual attention, customized remediation, and enrichment opportunities.
               </p>
+              <div className="pt-2">
+                <Link
+                  href="/frontend/academic-team"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#BF5700] hover:bg-orange-600 text-white text-xs font-bold rounded-xl shadow transition-colors"
+                >
+                  <span>Explore Academic Team Directory (70+ Faculty)</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
             <div className="md:col-span-6 relative h-80 rounded-2xl overflow-hidden shadow-card">
               <Image

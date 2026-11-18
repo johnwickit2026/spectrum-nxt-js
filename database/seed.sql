@@ -83,8 +83,17 @@ INSERT INTO staff (id, name, designation, department, team_type, bio, photo_url,
 -- 12. Committees
 INSERT INTO committees (id, name, designation, committee_type, photo_url, bio, sort_order) VALUES
 (1, 'Nur Ahammed Khokan', 'Founder & CEO', 'management', '/assets/IMG_9993.JPG.jpeg', 'Founder & CEO providing strategic governance, institutional vision, and infrastructural guidance for SIS.', 1),
-(2, 'Sharmin Akter Eva', 'Vice Principal & Academic Head', 'advisor', '/assets/IMG_2461.JPG.jpeg', 'Academic head leading curriculum governance, teacher training, and cognitive development benchmarks.', 2),
-(3, 'Mufti Shamsuddin Zia', 'Chairman, Shariah Supervisory Committee', 'sharia', '/assets/IMG_9469.JPG.jpeg', 'Chairman ensuring that all moral curricula, financial practices, and campus conduct uphold authentic Shariah values.', 3);
+(2, 'Sharmin Akter Eva', 'Vice Principal & Academic Head', 'management', '/assets/IMG_2461.JPG.jpeg', 'Vice Principal & Academic Head leading curriculum implementation, academic council governance, and pedagogical standards.', 2),
+(3, 'Shah Alamgir', 'Director of Finance', 'management', '/assets/IMG_9917.JPG.jpeg', 'Directing institutional financial planning, fiscal management, and resource allocation.', 3),
+(4, 'Tanbir Md. Ali Foysal', 'Head of Admin', 'management', '/assets/IMG_9917.JPG.jpeg', 'Leading campus administration, operations, facilities, and student services.', 4),
+(5, 'Md. Ayub', 'Head of Business Development', 'management', '/assets/IMG_9993.JPG.jpeg', 'Managing institutional partnerships, strategic outreach, and community engagement.', 5),
+(6, 'Fakhrul Hossain Aman', 'Senior Executive Officer (Admission and Admin Coordinator)', 'management', '/assets/IMG_2461.JPG.jpeg', 'Coordinating student enrollment, parent admissions guidance, and institutional administration workflows.', 6),
+(7, 'Sharmin Akter Eva', 'Vice Principal & Academic Head', 'advisor', '/assets/IMG_2461.JPG.jpeg', 'Academic head leading curriculum governance, teacher training, and cognitive development benchmarks.', 7),
+(8, 'Shaykh Mahmudul Hasan', 'Scholar & Head of Arabic', 'advisor', '/assets/IMG_9993.JPG.jpeg', 'Directing Arabic language acquisition frameworks, Islamic curriculum standards, and moral development (Tarbiyah).', 8),
+(9, 'Md. Ataullah', 'Teacher- Curriculum and Lang.', 'advisor', '/assets/IMG_9917.JPG.jpeg', 'Advising on English and mother-tongue language integration, phonics progression, and Cambridge curriculum assessment.', 9),
+(10, 'Mufti Shamsuddin Zia', 'Chairman, Shariah Supervisory Committee', 'sharia', '/assets/IMG_9469.JPG.jpeg', 'Chairman ensuring that all moral curricula, financial practices, and campus conduct uphold authentic Shariah values.', 10),
+(11, 'Member Two', 'Member, Shariah Supervisory Committee', 'sharia', '/assets/IMG_9469.JPG.jpeg', 'Shariah Supervisory Committee member reviewing Islamic ethics, campus Tarbiyah, and institutional alignment with authentic Islamic guidelines.', 11),
+(12, 'Member Three', 'Member, Shariah Supervisory Committee', 'sharia', '/assets/IMG_9469.JPG.jpeg', 'Shariah Supervisory Committee member counseling on Quranic memorization milestones, Islamic character formation, and Halal campus practices.', 12);
 
 -- 13. Careers
 INSERT INTO careers (id, title, department, job_type, deadline, requirements, responsibilities, is_active) VALUES

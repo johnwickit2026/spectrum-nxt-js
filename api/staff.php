@@ -88,17 +88,89 @@ $fallbackCommittees = [
         'id' => 2,
         'name' => 'Sharmin Akter Eva',
         'designation' => 'Vice Principal & Academic Head',
+        'committee_type' => 'management',
+        'photo_url' => '/assets/IMG_2461.JPG.jpeg',
+        'bio' => 'Vice Principal & Academic Head leading curriculum implementation, academic council governance, and pedagogical standards.'
+    ],
+    [
+        'id' => 3,
+        'name' => 'Shah Alamgir',
+        'designation' => 'Director of Finance',
+        'committee_type' => 'management',
+        'photo_url' => '/assets/IMG_9917.JPG.jpeg',
+        'bio' => 'Directing institutional financial planning, fiscal management, and resource allocation.'
+    ],
+    [
+        'id' => 4,
+        'name' => 'Tanbir Md. Ali Foysal',
+        'designation' => 'Head of Admin',
+        'committee_type' => 'management',
+        'photo_url' => '/assets/IMG_9917.JPG.jpeg',
+        'bio' => 'Leading campus administration, operations, facilities, and student services.'
+    ],
+    [
+        'id' => 5,
+        'name' => 'Md. Ayub',
+        'designation' => 'Head of Business Development',
+        'committee_type' => 'management',
+        'photo_url' => '/assets/IMG_9993.JPG.jpeg',
+        'bio' => 'Managing institutional partnerships, strategic outreach, and community engagement.'
+    ],
+    [
+        'id' => 6,
+        'name' => 'Fakhrul Hossain Aman',
+        'designation' => 'Senior Executive Officer (Admission and Admin Coordinator)',
+        'committee_type' => 'management',
+        'photo_url' => '/assets/IMG_2461.JPG.jpeg',
+        'bio' => 'Coordinating student enrollment, parent admissions guidance, and institutional administration workflows.'
+    ],
+    [
+        'id' => 7,
+        'name' => 'Sharmin Akter Eva',
+        'designation' => 'Vice Principal & Academic Head',
         'committee_type' => 'advisor',
         'photo_url' => '/assets/IMG_2461.JPG.jpeg',
         'bio' => 'Academic head leading curriculum governance, teacher training, and cognitive development benchmarks.'
     ],
     [
-        'id' => 3,
+        'id' => 8,
+        'name' => 'Shaykh Mahmudul Hasan',
+        'designation' => 'Scholar & Head of Arabic',
+        'committee_type' => 'advisor',
+        'photo_url' => '/assets/IMG_9993.JPG.jpeg',
+        'bio' => 'Directing Arabic language acquisition frameworks, Islamic curriculum standards, and moral development (Tarbiyah).'
+    ],
+    [
+        'id' => 9,
+        'name' => 'Md. Ataullah',
+        'designation' => 'Teacher- Curriculum and Lang.',
+        'committee_type' => 'advisor',
+        'photo_url' => '/assets/IMG_9917.JPG.jpeg',
+        'bio' => 'Advising on English and mother-tongue language integration, phonics progression, and Cambridge curriculum assessment.'
+    ],
+    [
+        'id' => 10,
         'name' => 'Mufti Shamsuddin Zia',
         'designation' => 'Chairman, Shariah Supervisory Committee',
         'committee_type' => 'sharia',
         'photo_url' => '/assets/IMG_9469.JPG.jpeg',
         'bio' => 'Chairman ensuring that all moral curricula, financial practices, and campus conduct uphold authentic Shariah values.'
+    ],
+    [
+        'id' => 11,
+        'name' => 'Member Two',
+        'designation' => 'Member, Shariah Supervisory Committee',
+        'committee_type' => 'sharia',
+        'photo_url' => '/assets/IMG_9469.JPG.jpeg',
+        'bio' => 'Shariah Supervisory Committee member reviewing Islamic ethics, campus Tarbiyah, and institutional alignment with authentic Islamic guidelines.'
+    ],
+    [
+        'id' => 12,
+        'name' => 'Member Three',
+        'designation' => 'Member, Shariah Supervisory Committee',
+        'committee_type' => 'sharia',
+        'photo_url' => '/assets/IMG_9469.JPG.jpeg',
+        'bio' => 'Shariah Supervisory Committee member counseling on Quranic memorization milestones, Islamic character formation, and Halal campus practices.'
     ]
 ];
 

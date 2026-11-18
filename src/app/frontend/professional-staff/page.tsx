@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import PageBanner from "@/components/PageBanner";
 import { ASSETS } from "@/lib/assets";
-import { Users, Award, ShieldCheck } from "lucide-react";
+import { Users, Award, ShieldCheck, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Professional Staff Members | Spectrum International School",
@@ -35,6 +36,22 @@ export default function ProfessionalStaffPage() {
               <p className="text-sm text-gray-700 leading-relaxed">
                 Every staff member undergoes background screening, child safeguarding training, and regular pedagogical upskilling in coordination with the British Council.
               </p>
+              <div className="pt-2 flex flex-wrap gap-3">
+                <Link
+                  href="/frontend/non-academic-team"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#92278F] hover:bg-purple-800 text-white text-xs font-bold rounded-xl shadow transition-colors"
+                >
+                  <span>Non-Academic Staff</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  href="/frontend/support-team"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#8AB326] hover:bg-lime-700 text-white text-xs font-bold rounded-xl shadow transition-colors"
+                >
+                  <span>Support Team</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
             <div className="md:col-span-6 relative h-80 rounded-2xl overflow-hidden shadow-card">
               <Image

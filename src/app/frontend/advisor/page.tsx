@@ -23,7 +23,7 @@ const advisors = [
   },
   {
     name: "Md. Ataullah",
-    role: "Teacher - Curriculum & Languages",
+    role: "Teacher- Curriculum and Lang.",
     bio: "Advising on English and mother-tongue language integration, phonics progression, and Cambridge curriculum assessment.",
     image: ASSETS.people.teachersStaff,
   },
@@ -79,6 +79,17 @@ export default function AdvisorPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Published Committee Framework Notice */}
+          <div className="mt-12 p-6 bg-purple-50/70 border border-purple-200/80 rounded-2xl text-xs text-purple-950 leading-relaxed space-y-2">
+            <p className="font-bold flex items-center gap-2 text-purple-900">
+              <span className="w-2 h-2 rounded-full bg-[#92278F] inline-block"></span>
+              Official Published Roster Information
+            </p>
+            <p>
+              The school’s general committee page describes advisory, executive, Sharia, curriculum, and academic-stage structures without naming committee members or assigning named stage leaders. Academic and advisory leads are presented here from the official published faculty and academic leadership roster.
+            </p>
           </div>
         </div>
       </div>

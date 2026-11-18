@@ -118,9 +118,9 @@ Open `api/config.php` and update the database definitions:
 
 ```php
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'u123456789_spectrum_sis');
-define('DB_USER', 'u123456789_sis_admin');
-define('DB_PASS', 'YourActualPasswordHere');
+define('DB_NAME', 'u153132463_johnwick');
+define('DB_USER', 'u153132463_nxtjs');
+define('DB_PASS', '!0^09+S;2t2U1ij+');
 ```
 
 Ensure the `api/uploads/` directory has write permissions (`chmod 755` or `chmod 775`).
