@@ -6,7 +6,7 @@ import { Award, BookOpen, GraduationCap, Mail, Phone } from "lucide-react";
 
 export const metadata = {
   title: "Academic Head | Spectrum International School",
-  description: "Academic leadership, curriculum standards, and pedagogical vision from the Academic Head at SIS.",
+  description: "Academic leadership, curriculum standards, and pedagogical vision from Sharmin Akter Eva, Vice Principal & Academic Head at SIS.",
 };
 
 export default function AcademicHeadPage() {
@@ -28,15 +28,15 @@ export default function AcademicHeadPage() {
               <div className="relative w-48 h-48 mx-auto rounded-2xl overflow-hidden shadow-lg border-4 border-white">
                 <Image
                   src={ASSETS.people.faculty}
-                  alt="Academic Head"
+                  alt="Sharmin Akter Eva, Vice Principal & Academic Head"
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-extrabold text-[#171E45]">Syeda Fatima Zahra</h3>
+                <h3 className="text-xl font-extrabold text-[#171E45]">Sharmin Akter Eva</h3>
                 <p className="text-xs font-bold text-[#92278F] uppercase tracking-wider mt-1">Vice Principal & Academic Head</p>
-                <p className="text-xs text-gray-600 mt-2">M.Sc (Physics), B.Ed, Cambridge Certified Educator</p>
+                <p className="text-xs text-gray-600 mt-2">Vice Principal & Academic Head, Spectrum International School</p>
               </div>
 
               <div className="pt-4 border-t border-gray-200/60 text-xs text-left space-y-2">

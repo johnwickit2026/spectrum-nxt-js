@@ -1,42 +1,38 @@
 import Image from "next/image";
 import PageBanner from "@/components/PageBanner";
 import { ASSETS } from "@/lib/assets";
-import { ShieldCheck, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 export const metadata = {
   title: "Support Team | Spectrum International School",
-  description: "Campus security, hygiene caregivers, maintenance, and logistics team at Spectrum International School.",
+  description: "Official published support staff, campus security, hygiene caregivers, and facilities team at Spectrum International School.",
 };
 
 const supportStaff = [
-  {
-    name: "Kamal Hossain",
-    role: "Campus Facilities & Logistics Manager",
-    department: "Logistics & Maintenance",
-    image: ASSETS.people.teachersStaff,
-    note: "Oversees building readiness, generator backup, air filtration, and event logistics.",
-  },
-  {
-    name: "Abdur Rashid",
-    role: "Chief Security Officer",
-    department: "Campus Security",
-    image: ASSETS.people.founderCeo,
-    note: "Managing 24/7 CCTV surveillance, gate checkpoints, visitor logs, and student dismissal safety.",
-  },
-  {
-    name: "Salma Begum",
-    role: "Senior Childcare & Hygiene Supervisor",
-    department: "Pastoral Support",
-    image: ASSETS.people.faculty,
-    note: "Ensuring sanitization, first-aid assistance, and gentle care for Play Group and Nursery learners.",
-  },
-  {
-    name: "Delwar Hossain",
-    role: "Transport & Dispatch Supervisor",
-    department: "Transportation",
-    image: ASSETS.people.teachersStaff,
-    note: "Coordinating school van fleet, route timing, and driver safety certifications.",
-  },
+  { name: "Morshed Alam", role: "Jr. Officer", department: "Operations", image: ASSETS.people.teachersStaff },
+  { name: "Saiful Islam Shipon", role: "Jr. Officer", department: "Operations", image: ASSETS.people.teachersStaff },
+  { name: "Shahadat Hossain", role: "Support Staff", department: "Facilities", image: ASSETS.people.teachersStaff },
+  { name: "Shayla Akter", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Md. Ismail", role: "Support Staff", department: "Facilities", image: ASSETS.people.teachersStaff },
+  { name: "Monir Hossain", role: "Cook", department: "Dining & Catering", image: ASSETS.people.teachersStaff },
+  { name: "Israfil Sujon", role: "Cook", department: "Dining & Catering", image: ASSETS.people.teachersStaff },
+  { name: "Md. Azadul", role: "Support Staff", department: "Facilities", image: ASSETS.people.teachersStaff },
+  { name: "Pear Ahammed", role: "Security", department: "Campus Security", image: ASSETS.people.teachersStaff },
+  { name: "Sazzat Hossain", role: "Support Staff", department: "Facilities", image: ASSETS.people.teachersStaff },
+  { name: "Tania Akter", role: "Cleaner", department: "Hygiene & Housekeeping", image: ASSETS.people.faculty },
+  { name: "Afroza Akter", role: "Support Staff", department: "Pastoral Support", image: ASSETS.people.faculty },
+  { name: "Sharmin Akter", role: "Support Staff", department: "Pastoral Support", image: ASSETS.people.faculty },
+  { name: "Halima Begum", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Muhammad Mosarof Hossain", role: "Security", department: "Campus Security", image: ASSETS.people.teachersStaff },
+  { name: "Mitali Akter", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Md. Monir Hossain", role: "Support Staff (Novel House)", department: "Novel House", image: ASSETS.people.teachersStaff },
+  { name: "Bristy Akter", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Shohana Akter", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Md. Shafiqul", role: "Support Staff", department: "Facilities", image: ASSETS.people.teachersStaff },
+  { name: "Bobi Begum", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Rita Akter", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Marjana Khan", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
+  { name: "Arifa Chowdhury", role: "Support Staff", department: "Care & Hygiene", image: ASSETS.people.faculty },
 ];
 
 export default function SupportTeamPage() {
@@ -60,18 +56,18 @@ export default function SupportTeamPage() {
               Safety, Logistics & Facility Care
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 mt-2">
-              Providing a spotless, secure, and nurturing campus environment where children thrive every day.
+              Official published directory of campus caregivers, security officers, and support staff.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {supportStaff.map((staff, i) => (
               <div
                 key={i}
-                className="bg-gray-50 rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col justify-between"
+                className="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-green-300 shadow-sm transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative h-48 rounded-xl overflow-hidden shadow-sm mb-4">
+                  <div className="relative h-44 rounded-xl overflow-hidden shadow-sm mb-4 border border-gray-200/50">
                     <Image
                       src={staff.image}
                       alt={staff.name}
@@ -82,14 +78,13 @@ export default function SupportTeamPage() {
                   <span className="text-[10px] font-bold text-[#8AB326] uppercase tracking-wider bg-green-100 px-2 py-0.5 rounded">
                     {staff.department}
                   </span>
-                  <h3 className="text-base font-bold text-[#171E45] mt-2">{staff.name}</h3>
-                  <p className="text-xs font-semibold text-gray-700">{staff.role}</p>
-                  <p className="text-[11px] text-gray-600 mt-3 leading-relaxed">{staff.note}</p>
+                  <h3 className="text-sm font-bold text-[#171E45] mt-2 line-clamp-1">{staff.name}</h3>
+                  <p className="text-xs font-semibold text-gray-700 mt-0.5 leading-snug">{staff.role}</p>
                 </div>
 
                 <div className="pt-3 border-t border-gray-200/60 mt-4 text-[11px] text-gray-500 flex items-center gap-1.5">
                   <Heart className="w-3.5 h-3.5 text-[#8AB326]" />
-                  <span>Pastoral Care Team</span>
+                  <span>Support Services</span>
                 </div>
               </div>
             ))}

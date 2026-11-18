@@ -10,28 +10,40 @@ export const metadata = {
 
 const committeeMembers = [
   {
-    name: "Engr. A. K. M. Shamsuddin",
-    role: "Chairman, Governing Board",
-    bio: "Distinguished engineer and educationist providing strategic institutional direction, capital infrastructure planning, and board governance.",
+    name: "Nur Ahammed Khokan",
+    role: "Founder & CEO",
+    bio: "Founding visionary driving institutional growth, holistic educational standards, and progressive academic governance for SIS.",
     image: ASSETS.people.founderCeo,
   },
   {
-    name: "Dr. M. A. Rahman",
-    role: "Founder & Chief Executive Officer",
-    bio: "Visionary leader spearheading academic partnerships, institutional growth, and integrated Islamic educational standards.",
-    image: ASSETS.people.founderCeo,
-  },
-  {
-    name: "Syeda Fatima Zahra",
-    role: "Member Secretary & Academic Head",
-    bio: "Overseeing daily academic standards, curriculum alignment, teacher recruitment, and British Council examination coordination.",
+    name: "Sharmin Akter Eva",
+    role: "Vice Principal & Academic Head",
+    bio: "Academic head overseeing curriculum implementation, teaching standards, Cambridge program benchmarks, and student mentorship.",
     image: ASSETS.people.faculty,
   },
   {
-    name: "Tariq Hasan",
-    role: "Director of Finance & Administration",
-    bio: "Senior administrator managing institutional accounts, parent billing, operational logistics, and safety protocols.",
+    name: "Shah Alamgir",
+    role: "Director of Finance",
+    bio: "Directing financial planning, fiscal management, institutional resources, and long-term infrastructure investments.",
     image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Tanbir Md. Ali Foysal",
+    role: "Head of Admin",
+    bio: "Leading campus operations, administrative services, institutional coordination, and regulatory compliance.",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Md. Ayub",
+    role: "Head of Business Development",
+    bio: "Managing institutional partnerships, strategic outreach, and community engagement for Spectrum International School.",
+    image: ASSETS.people.founderCeo,
+  },
+  {
+    name: "Fakhrul Hossain Aman",
+    role: "Senior Executive Officer (Admission & Admin Coordinator)",
+    bio: "Coordinating student enrollment, parent admissions guidance, and institutional administration workflows.",
+    image: ASSETS.people.faculty,
   },
 ];
 

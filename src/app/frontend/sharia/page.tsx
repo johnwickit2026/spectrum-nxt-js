@@ -5,27 +5,33 @@ import { ShieldCheck, BookOpen } from "lucide-react";
 
 export const metadata = {
   title: "Sharia Committee | Spectrum International School",
-  description: "Islamic scholars and Sharia Advisory Board overseeing moral curriculum, Tahfeezul Quran, and ethical campus life.",
+  description: "Islamic scholars and Shariah Supervisory Committee overseeing moral curriculum, Tahfeezul Quran, and ethical campus life.",
 };
 
 const scholars = [
   {
-    name: "Mufti Dr. Abu Bakar Siddique",
-    role: "Chairman, Sharia Advisory Board",
-    bio: "Renowned Islamic jurist and author overseeing curriculum morality, ethical conduct benchmarks, and Islamic studies syllabi.",
+    name: "Mufti Shamsuddin Zia",
+    role: "Chairman, Shariah Supervisory Committee",
+    bio: "Eminent Islamic scholar providing Shariah oversight, moral guidance, and Islamic curriculum direction for Spectrum International School.",
     image: ASSETS.activities.hifzDepartment,
   },
   {
-    name: "Sheikh Muhammad Abdullah",
-    role: "Director of Tahfeezul Quran",
-    bio: "Certified Qari with Sanad in Hafs an Asim, directing the Boys and Girls Quran memorization programs and Tajweed standards.",
+    name: "Shaykh Mahmudul Hasan",
+    role: "Scholar & Head of Arabic",
+    bio: "Distinguished Islamic scholar directing Arabic language pedagogy, Quranic comprehension, and Islamic foundational studies.",
     image: ASSETS.people.founderCeo,
   },
   {
-    name: "Ustadha Maryam Binte Yousuf",
-    role: "Lead Advisor, Girls Hifz & Tarbiyah",
-    bio: "Senior Islamic educator mentoring female learners in Quranic memorization, modesty, and character excellence.",
+    name: "Mahmudul Hasan",
+    role: "Lead Teacher - Al Quran & Religious Dept & Preceptor - Hifz",
+    bio: "Senior Quran preceptor leading the Tahfeezul Quran department, Tajweed recitation standards, and daily Tarbiyah mentoring.",
     image: ASSETS.people.faculty,
+  },
+  {
+    name: "Zakir Bin Mostak Azhari",
+    role: "Lead Teacher - Al Quran & Religious Department",
+    bio: "Al-Azhar trained scholar guiding Quranic recitation, Islamic studies syllabus, and spiritual development across grades.",
+    image: ASSETS.activities.hifzDepartment,
   },
 ];
 
@@ -54,7 +60,7 @@ export default function ShariaPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {scholars.map((sch, i) => (
               <div
                 key={i}

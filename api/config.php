@@ -23,9 +23,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Database Credentials - update with Hostinger MySQL database details
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_NAME', getenv('DB_NAME') ?: 'u123456789_spectrum_sis');
-define('DB_USER', getenv('DB_USER') ?: 'u123456789_sis_admin');
-define('DB_PASS', getenv('DB_PASS') ?: 'SpectrumSIS@2026');
+define('DB_NAME', getenv('DB_NAME') ?: 'u153132463_spec');
+define('DB_USER', getenv('DB_USER') ?: 'u153132463_spectrumintl');
+define('DB_PASS', getenv('DB_PASS') ?: 'YOUR_DB_PASSWORD_HERE');
 define('DB_CHARSET', 'utf8mb4');
 
 // Upload directory path

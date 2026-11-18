@@ -10,21 +10,21 @@ export const metadata = {
 
 const advisors = [
   {
-    name: "Dr. Tahmina Begum",
-    role: "Senior Education Advisor & Pedagogy Specialist",
-    bio: "Former University Professor and curriculum consultant advising on international pedagogical benchmarks, teacher training, and cognitive development.",
+    name: "Sharmin Akter Eva",
+    role: "Vice Principal & Academic Head",
+    bio: "Guiding pedagogical benchmarks, Cambridge curriculum alignment, continuous teacher training, and academic quality assurance.",
     image: ASSETS.people.faculty,
   },
   {
-    name: "Prof. Dr. Anisur Rahman",
-    role: "STEM Curriculum Consultant",
-    bio: "Renowned scientist and educator guiding the integration of experimental science inquiry, STEM robotics, and physics laboratories.",
+    name: "Shaykh Mahmudul Hasan",
+    role: "Scholar & Head of Arabic",
+    bio: "Directing Arabic language acquisition frameworks, Islamic curriculum standards, and moral development (Tarbiyah).",
     image: ASSETS.people.founderCeo,
   },
   {
-    name: "Syed Kamrul Ahsan",
-    role: "Senior Educational Policy Advisor",
-    bio: "Career educationist with three decades of experience in Cambridge International curricula and secondary education standards in Bangladesh.",
+    name: "Md. Ataullah",
+    role: "Teacher - Curriculum & Languages",
+    bio: "Advising on English and mother-tongue language integration, phonics progression, and Cambridge curriculum assessment.",
     image: ASSETS.people.teachersStaff,
   },
 ];

@@ -73,17 +73,18 @@ INSERT INTO video_gallery (id, title, youtube_id, video_url, thumbnail_url, sort
 
 -- 11. Staff
 INSERT INTO staff (id, name, designation, department, team_type, bio, photo_url, phone, email, sort_order) VALUES
-(1, 'Dr. M. A. Rahman', 'Principal & Academic Director', 'Academic Leadership', 'academic', 'Eminent academician with over 25 years of leadership in international British curriculum and holistic education.', '/assets/IMG_9993.JPG.jpeg', '+880 1799-369685', 'principal@spectrumintlschool.com', 1),
-(2, 'Syeda Fatima Zahra', 'Vice Principal & Head of Senior Section', 'Senior School', 'academic', 'Passionate educator committed to Pearson Edexcel & Cambridge O/A Level academic excellence and student mentoring.', '/assets/IMG_2461.JPG.jpeg', '+880 1799-369685', 'vp@spectrumintlschool.com', 2),
-(3, 'Sheikh Muhammad Abdullah', 'Director of Islamic Studies & Tahfeez', 'Islamic Studies', 'academic', 'Certified Qari and scholar overseeing Quranic memorization, Tajweed, and Tarbiyah programs.', '/assets/IMG_9469.JPG.jpeg', '+880 1799-369685', 'islamicstudies@spectrumintlschool.com', 3),
-(4, 'Tariq Hasan', 'Chief Finance & Accounts Officer', 'Administration & Finance', 'non-academic', 'Oversees fiscal operations, parent accounts, fee management, and institutional resource planning.', '/assets/IMG_9917.JPG.jpeg', '+880 1730-369686', 'accounts@spectrumintlschool.com', 4),
-(5, 'Kamal Hossain', 'Campus Facilities & Logistics Manager', 'Operations', 'support', 'Dedicated supervisor maintaining campus hygiene, 24/7 security, lab safety, and transport logistics.', '/assets/IMG_9917.JPG.jpeg', '+880 1730-369686', 'operations@spectrumintlschool.com', 5);
+(1, 'Nur Ahammed Khokan', 'Founder & CEO', 'Executive Leadership', 'academic', 'Founder & CEO driving academic vision, institutional excellence, and holistic Cambridge-Islamic education at Spectrum International School.', '/assets/IMG_9993.JPG.jpeg', '+880 1799-369685', 'spectrumintlschool@gmail.com', 1),
+(2, 'Sharmin Akter Eva', 'Vice Principal & Academic Head', 'Academic Leadership', 'academic', 'Vice Principal & Academic Head overseeing curriculum implementation, pedagogical standards, and student mentoring.', '/assets/IMG_2461.JPG.jpeg', '+880 1799-369685', 'academics@spectrumintlschool.com', 2),
+(3, 'Shaykh Mahmudul Hasan', 'Scholar & Head of Arabic', 'Islamic Studies & Arabic', 'academic', 'Scholar directing Arabic language studies, Quranic understanding, and moral character education.', '/assets/IMG_9469.JPG.jpeg', '+880 1799-369685', 'islamicstudies@spectrumintlschool.com', 3),
+(4, 'Shah Alamgir', 'Director of Finance', 'Finance & Accounts', 'non-academic', 'Directing institutional financial planning, fiscal management, and resource allocation.', '/assets/IMG_9917.JPG.jpeg', '+880 1730-369686', 'accounts@spectrumintlschool.com', 4),
+(5, 'Tanbir Md. Ali Foysal', 'Head of Admin', 'Administration', 'non-academic', 'Leading campus administration, operations, facilities, and student services.', '/assets/IMG_9917.JPG.jpeg', '+880 1730-369686', 'admin@spectrumintlschool.com', 5),
+(6, 'Mohammed Kaizer Siddiquee', 'Security In charge', 'Campus Safety & Logistics', 'support', 'In charge of campus safety, security checkpoints, and student transportation protocols.', '/assets/IMG_9917.JPG.jpeg', '+880 1730-369686', 'security@spectrumintlschool.com', 6);
 
 -- 12. Committees
 INSERT INTO committees (id, name, designation, committee_type, photo_url, bio, sort_order) VALUES
-(1, 'Engr. A. K. M. Shamsuddin', 'Chairman, Governing Board', 'management', '/assets/IMG_9993.JPG.jpeg', 'Distinguished industry leader providing strategic governance, ethical oversight, and infrastructural guidance for SIS.', 1),
-(2, 'Dr. Tahmina Begum', 'Senior Education Advisor', 'advisor', '/assets/IMG_2461.JPG.jpeg', 'Former professor and curriculum consultant advising on international pedagogical benchmarks and teacher training.', 2),
-(3, 'Mufti Dr. Abu Bakar Siddique', 'Head of Sharia Advisory Board', 'sharia', '/assets/IMG_9469.JPG.jpeg', 'Prominent Islamic jurist ensuring that all moral curricula, financial practices, and campus conduct uphold Islamic values.', 3);
+(1, 'Nur Ahammed Khokan', 'Founder & CEO', 'management', '/assets/IMG_9993.JPG.jpeg', 'Founder & CEO providing strategic governance, institutional vision, and infrastructural guidance for SIS.', 1),
+(2, 'Sharmin Akter Eva', 'Vice Principal & Academic Head', 'advisor', '/assets/IMG_2461.JPG.jpeg', 'Academic head leading curriculum governance, teacher training, and cognitive development benchmarks.', 2),
+(3, 'Mufti Shamsuddin Zia', 'Chairman, Shariah Supervisory Committee', 'sharia', '/assets/IMG_9469.JPG.jpeg', 'Chairman ensuring that all moral curricula, financial practices, and campus conduct uphold authentic Shariah values.', 3);
 
 -- 13. Careers
 INSERT INTO careers (id, title, department, job_type, deadline, requirements, responsibilities, is_active) VALUES

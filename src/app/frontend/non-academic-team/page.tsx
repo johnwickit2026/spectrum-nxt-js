@@ -5,40 +5,122 @@ import { Mail, Phone, Briefcase } from "lucide-react";
 
 export const metadata = {
   title: "Non Academic Team | Spectrum International School",
-  description: "Administrative, admissions, accounts, and operational team members at Spectrum International School.",
+  description: "Official published non-academic, administrative, and operations staff directory of Spectrum International School.",
 };
 
 const nonAcademicStaff = [
   {
-    name: "Tariq Hasan",
-    role: "Chief Finance & Accounts Officer",
-    department: "Finance & Accounts",
-    phone: "+880 1730-369686",
-    email: "accounts@spectrumintlschool.com",
-    image: ASSETS.people.teachersStaff,
-  },
-  {
-    name: "Mohammad Saiful Islam",
-    role: "Admissions & Public Relations Officer",
-    department: "Admissions Desk",
-    phone: "+880 1799-369685",
-    email: "admissions@spectrumintlschool.com",
+    name: "Nur Ahammed",
+    role: "CEO & Founder",
+    department: "Executive Leadership",
     image: ASSETS.people.founderCeo,
   },
   {
-    name: "Farzana Yasmin",
-    role: "Executive Secretary to CEO",
-    department: "Secretariat",
-    phone: "+880 1799-369685",
-    email: "ceo.office@spectrumintlschool.com",
+    name: "Sharmin Akter Eva",
+    role: "Vice-Principal",
+    department: "Academic Leadership",
     image: ASSETS.people.faculty,
   },
   {
-    name: "Jamil Chowdhury",
-    role: "IT & Systems Administrator",
-    department: "IT Infrastructure & Portals",
-    phone: "0248318285",
-    email: "it@spectrumintlschool.com",
+    name: "Shah Alamgir",
+    role: "Director of Finance",
+    department: "Finance & Accounts",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Tanbir Md. Ali Foysal",
+    role: "Head of Admin",
+    department: "Administration",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Md. Ayub",
+    role: "Head of Business Development",
+    department: "Institutional Development",
+    image: ASSETS.people.founderCeo,
+  },
+  {
+    name: "Fakhrul Hossain Aman",
+    role: "Senior Executive Officer (Admission & Admin Coordinator)",
+    department: "Admissions & Admin",
+    image: ASSETS.people.faculty,
+  },
+  {
+    name: "G.M. Arafat Uddin",
+    role: "Assistant Manager",
+    department: "Operations",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Md. Hadaitullah",
+    role: "Assistant Manager",
+    department: "Operations",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Md. Samir Uddin",
+    role: "Assistant Manager",
+    department: "Operations",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Mohammed Saiful Abedin",
+    role: "Senior IT Officer",
+    department: "IT Infrastructure",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Rahat Rahman",
+    role: "Admin & IT Officer",
+    department: "Administration & IT",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Md Nazim Uddin Noman",
+    role: "Admission Officer",
+    department: "Admissions Desk",
+    image: ASSETS.people.faculty,
+  },
+  {
+    name: "Mir Mosharof Hossen",
+    role: "Accounts Officer",
+    department: "Finance & Accounts",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Abdur Razzak Pappu",
+    role: "Officer",
+    department: "Administration",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Mohammed Kaizer Siddiquee",
+    role: "Security In charge",
+    department: "Campus Safety & Security",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Aminul Islam Chowdhury",
+    role: "Executive",
+    department: "Administration",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Md. Abeer-Ul Islam",
+    role: "Executive",
+    department: "Administration",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Al-Amin Chowdhury",
+    role: "Executive",
+    department: "Administration",
+    image: ASSETS.people.teachersStaff,
+  },
+  {
+    name: "Md Abdullah Al Masud",
+    role: "Executive",
+    department: "Administration",
     image: ASSETS.people.teachersStaff,
   },
 ];
@@ -49,7 +131,7 @@ export default function NonAcademicTeamPage() {
       <PageBanner
         title="Non Academic Team"
         badge="Administration & Desk"
-        subtitle="The dedicated professionals driving admissions, accounts, communications, and digital services."
+        subtitle="The dedicated professionals driving admissions, accounts, communications, and institutional services."
         breadcrumbs={[{ label: "About Us", href: "/frontend/aboutus" }, { label: "Non Academic Team" }]}
         bgImage={ASSETS.campus.building}
       />
@@ -64,18 +146,18 @@ export default function NonAcademicTeamPage() {
               Operations & Administration
             </h2>
             <p className="text-xs sm:text-sm text-gray-600 mt-2">
-              Ensuring seamless parent interactions, timely notice delivery, and fiscal transparency.
+              Official published directory of non-academic and administrative team members.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {nonAcademicStaff.map((staff, i) => (
               <div
                 key={i}
-                className="bg-gray-50 rounded-2xl p-5 border border-gray-100 shadow-sm flex flex-col justify-between"
+                className="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-purple-300 shadow-sm transition-all flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative h-48 rounded-xl overflow-hidden shadow-sm mb-4">
+                  <div className="relative h-44 rounded-xl overflow-hidden shadow-sm mb-4 border border-gray-200/50">
                     <Image
                       src={staff.image}
                       alt={staff.name}
@@ -86,22 +168,11 @@ export default function NonAcademicTeamPage() {
                   <span className="text-[10px] font-bold text-[#92278F] uppercase tracking-wider bg-purple-100 px-2 py-0.5 rounded">
                     {staff.department}
                   </span>
-                  <h3 className="text-base font-bold text-[#171E45] mt-2">{staff.name}</h3>
-                  <p className="text-xs font-semibold text-gray-700">{staff.role}</p>
-
-                  <div className="mt-4 pt-3 border-t border-gray-200/60 text-[11px] text-gray-600 space-y-1">
-                    <p className="flex items-center gap-1.5">
-                      <Phone className="w-3 h-3 text-[#BF5700]" />
-                      <span>{staff.phone}</span>
-                    </p>
-                    <p className="flex items-center gap-1.5 truncate">
-                      <Mail className="w-3 h-3 text-[#BF5700]" />
-                      <span className="truncate">{staff.email}</span>
-                    </p>
-                  </div>
+                  <h3 className="text-sm font-bold text-[#171E45] mt-2 line-clamp-1">{staff.name}</h3>
+                  <p className="text-xs font-semibold text-gray-700 mt-0.5 leading-snug">{staff.role}</p>
                 </div>
 
-                <div className="pt-3 border-t border-gray-200/60 mt-3 text-[11px] text-gray-500 flex items-center gap-1.5">
+                <div className="pt-3 border-t border-gray-200/60 mt-4 text-[11px] text-gray-500 flex items-center gap-1.5">
                   <Briefcase className="w-3.5 h-3.5 text-[#BF5700]" />
                   <span>Administrative Staff</span>
                 </div>

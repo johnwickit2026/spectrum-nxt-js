@@ -6,7 +6,7 @@ import { Calendar, Mail, Phone, Quote, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "Founder & CEO | Spectrum International School",
-  description: "Message and vision from Dr. M. A. Rahman, Founder & CEO of Spectrum International School.",
+  description: "Message and vision from Nur Ahammed Khokan, Founder & CEO of Spectrum International School.",
 };
 
 export default function CeoPage() {
@@ -15,7 +15,7 @@ export default function CeoPage() {
       <PageBanner
         title="Founder & CEO"
         badge="School Leadership"
-        subtitle="Dr. M. A. Rahman on the founding vision, progressive pedagogy, and values shaping Spectrum International School."
+        subtitle="Nur Ahammed Khokan on the founding vision, progressive pedagogy, and values shaping Spectrum International School."
         breadcrumbs={[{ label: "About Us", href: "/frontend/aboutus" }, { label: "Founder & CEO" }]}
         bgImage={ASSETS.hero.banner2}
       />
@@ -28,13 +28,13 @@ export default function CeoPage() {
               <div className="relative w-48 h-48 mx-auto rounded-2xl overflow-hidden shadow-lg border-4 border-white">
                 <Image
                   src={ASSETS.people.founderCeo}
-                  alt="Dr. M. A. Rahman, Founder & CEO"
+                  alt="Nur Ahammed Khokan, Founder & CEO"
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl font-extrabold text-[#171E45]">Dr. M. A. Rahman</h3>
+                <h3 className="text-xl font-extrabold text-[#171E45]">Nur Ahammed Khokan</h3>
                 <p className="text-xs font-bold text-[#BF5700] uppercase tracking-wider mt-1">Founder & CEO</p>
                 <p className="text-xs text-gray-600 mt-2">Spectrum International School & EduCare Group</p>
               </div>
@@ -86,7 +86,7 @@ export default function CeoPage() {
 
               <div className="pt-4 flex items-center justify-between border-t border-gray-100">
                 <div>
-                  <p className="font-serif italic font-bold text-lg text-[#171E45]">Dr. M. A. Rahman</p>
+                  <p className="font-serif italic font-bold text-lg text-[#171E45]">Nur Ahammed Khokan</p>
                   <p className="text-xs text-gray-500">Founder & CEO, Spectrum International School</p>
                 </div>
                 <Link

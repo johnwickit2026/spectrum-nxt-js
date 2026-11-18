@@ -608,7 +608,7 @@ export default function HomePage() {
                     className="object-cover"
                   />
                 </div>
-                <h4 className="text-lg font-extrabold text-[#171E45]">Dr. M. A. Rahman</h4>
+                <h4 className="text-lg font-extrabold text-[#171E45]">Nur Ahammed Khokan</h4>
                 <p className="text-xs font-semibold text-[#BF5700]">Founder & Chief Executive Officer</p>
                 <p className="text-[11px] text-gray-500 mt-1">Spectrum International School</p>
               </div>

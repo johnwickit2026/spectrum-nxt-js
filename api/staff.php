@@ -9,85 +9,96 @@ $committee = sanitizeInput($_GET['committee'] ?? '');
 $fallbackStaff = [
     [
         'id' => 1,
-        'name' => 'Dr. M. A. Rahman',
-        'designation' => 'Principal & Academic Director',
-        'department' => 'Academic Leadership',
+        'name' => 'Nur Ahammed Khokan',
+        'designation' => 'Founder & CEO',
+        'department' => 'Executive Leadership',
         'team_type' => 'academic',
-        'bio' => 'Eminent academician with over 25 years of leadership in international British curriculum and holistic education.',
+        'bio' => 'Founder & CEO driving academic vision, institutional excellence, and holistic Cambridge-Islamic education at Spectrum International School.',
         'photo_url' => '/assets/IMG_9993.JPG.jpeg',
         'phone' => '+880 1799-369685',
-        'email' => 'principal@spectrumintlschool.com'
+        'email' => 'spectrumintlschool@gmail.com'
     ],
     [
         'id' => 2,
-        'name' => 'Syeda Fatima Zahra',
-        'designation' => 'Vice Principal & Head of Senior Section',
-        'department' => 'Senior School',
+        'name' => 'Sharmin Akter Eva',
+        'designation' => 'Vice Principal & Academic Head',
+        'department' => 'Academic Leadership',
         'team_type' => 'academic',
-        'bio' => 'Passionate educator committed to Pearson Edexcel & Cambridge O/A Level academic excellence and student mentoring.',
+        'bio' => 'Vice Principal & Academic Head overseeing curriculum implementation, pedagogical standards, and student mentoring.',
         'photo_url' => '/assets/IMG_2461.JPG.jpeg',
         'phone' => '+880 1799-369685',
-        'email' => 'vp@spectrumintlschool.com'
+        'email' => 'academics@spectrumintlschool.com'
     ],
     [
         'id' => 3,
-        'name' => 'Sheikh Muhammad Abdullah',
-        'designation' => 'Director of Islamic Studies & Tahfeez',
-        'department' => 'Islamic Studies',
+        'name' => 'Shaykh Mahmudul Hasan',
+        'designation' => 'Scholar & Head of Arabic',
+        'department' => 'Islamic Studies & Arabic',
         'team_type' => 'academic',
-        'bio' => 'Certified Qari and scholar overseeing Quranic memorization, Tajweed, and Tarbiyah programs.',
+        'bio' => 'Scholar directing Arabic language studies, Quranic understanding, and moral character education.',
         'photo_url' => '/assets/IMG_9469.JPG.jpeg',
         'phone' => '+880 1799-369685',
         'email' => 'islamicstudies@spectrumintlschool.com'
     ],
     [
         'id' => 4,
-        'name' => 'Tariq Hasan',
-        'designation' => 'Chief Finance & Accounts Officer',
-        'department' => 'Administration & Finance',
+        'name' => 'Shah Alamgir',
+        'designation' => 'Director of Finance',
+        'department' => 'Finance & Accounts',
         'team_type' => 'non-academic',
-        'bio' => 'Oversees fiscal operations, parent accounts, fee management, and institutional resource planning.',
+        'bio' => 'Directing institutional financial planning, fiscal management, and resource allocation.',
         'photo_url' => '/assets/IMG_9917.JPG.jpeg',
         'phone' => '+880 1730-369686',
         'email' => 'accounts@spectrumintlschool.com'
     ],
     [
         'id' => 5,
-        'name' => 'Kamal Hossain',
-        'designation' => 'Campus Facilities & Logistics Manager',
-        'department' => 'Operations',
-        'team_type' => 'support',
-        'bio' => 'Dedicated supervisor maintaining campus hygiene, 24/7 security, lab safety, and transport logistics.',
+        'name' => 'Tanbir Md. Ali Foysal',
+        'designation' => 'Head of Admin',
+        'department' => 'Administration',
+        'team_type' => 'non-academic',
+        'bio' => 'Leading campus administration, operations, facilities, and student services.',
         'photo_url' => '/assets/IMG_9917.JPG.jpeg',
         'phone' => '+880 1730-369686',
-        'email' => 'operations@spectrumintlschool.com'
+        'email' => 'admin@spectrumintlschool.com'
+    ],
+    [
+        'id' => 6,
+        'name' => 'Mohammed Kaizer Siddiquee',
+        'designation' => 'Security In charge',
+        'department' => 'Campus Safety & Logistics',
+        'team_type' => 'support',
+        'bio' => 'In charge of campus safety, security checkpoints, and student transportation protocols.',
+        'photo_url' => '/assets/IMG_9917.JPG.jpeg',
+        'phone' => '+880 1730-369686',
+        'email' => 'security@spectrumintlschool.com'
     ]
 ];
 
 $fallbackCommittees = [
     [
         'id' => 1,
-        'name' => 'Engr. A. K. M. Shamsuddin',
-        'designation' => 'Chairman, Governing Board',
+        'name' => 'Nur Ahammed Khokan',
+        'designation' => 'Founder & CEO',
         'committee_type' => 'management',
         'photo_url' => '/assets/IMG_9993.JPG.jpeg',
-        'bio' => 'Distinguished industry leader providing strategic governance, ethical oversight, and infrastructural guidance for SIS.'
+        'bio' => 'Founder & CEO driving strategic institutional direction, capital infrastructure planning, and board governance.'
     ],
     [
         'id' => 2,
-        'name' => 'Dr. Tahmina Begum',
-        'designation' => 'Senior Education Advisor',
+        'name' => 'Sharmin Akter Eva',
+        'designation' => 'Vice Principal & Academic Head',
         'committee_type' => 'advisor',
         'photo_url' => '/assets/IMG_2461.JPG.jpeg',
-        'bio' => 'Former professor and curriculum consultant advising on international pedagogical benchmarks and teacher training.'
+        'bio' => 'Academic head leading curriculum governance, teacher training, and cognitive development benchmarks.'
     ],
     [
         'id' => 3,
-        'name' => 'Mufti Dr. Abu Bakar Siddique',
-        'designation' => 'Head of Sharia Advisory Board',
+        'name' => 'Mufti Shamsuddin Zia',
+        'designation' => 'Chairman, Shariah Supervisory Committee',
         'committee_type' => 'sharia',
         'photo_url' => '/assets/IMG_9469.JPG.jpeg',
-        'bio' => 'Prominent Islamic jurist ensuring that all moral curricula, financial practices, and campus conduct uphold Islamic values.'
+        'bio' => 'Chairman ensuring that all moral curricula, financial practices, and campus conduct uphold authentic Shariah values.'
     ]
 ];
 
