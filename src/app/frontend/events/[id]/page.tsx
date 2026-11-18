@@ -66,7 +66,8 @@ export async function generateStaticParams() {
   return allEvents.map((ev) => ({ id: ev.id }));
 }
 
-export default function EventDetailPage({ params }: { params: { id: string } }) {
+export default async function EventDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const event = allEvents.find((e) => e.id === params.id);
 
   if (!event) {

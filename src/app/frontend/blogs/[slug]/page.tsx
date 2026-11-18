@@ -77,7 +77,8 @@ export async function generateStaticParams() {
   return allBlogs.map((b) => ({ slug: b.slug }));
 }
 
-export default function BlogDetailPage({ params }: { params: { slug: string } }) {
+export default async function BlogDetailPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const blog = allBlogs.find((b) => b.slug === params.slug);
 
   if (!blog) {
