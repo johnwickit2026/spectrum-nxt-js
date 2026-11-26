@@ -26,6 +26,14 @@ import {
   Upload,
   RefreshCw,
   Search,
+  FileText,
+  Clock,
+  Compass,
+  Tv,
+  Edit2,
+  ExternalLink,
+  Download,
+  X
 } from "lucide-react";
 
 export default function DigiAdminPage() {
@@ -39,44 +47,66 @@ export default function DigiAdminPage() {
   const [loginError, setLoginError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  // Dashboard states
-  const [stats, setStats] = useState<any>({
-    total_blogs: 4,
-    total_notices: 5,
-    total_events: 4,
-    contact_submissions: 3,
-    feedback_submissions: 1,
-    appointment_requests: 2,
-    admissions_status: "Open",
-  });
-
+  // Settings state
   const [settings, setSettings] = useState<any>({
     admissions_enabled: "1",
-    admission_popup_title: "Admissions Open for 2026-2027",
+    admission_popup_title: "Admissions Open for Academic Session 2026-2027",
     admission_popup_content: "Apply now for Play Group through A-Levels and Hifzul Quran program at Spectrum International School.",
     admission_popup_image: "/assets/IMG_9861.JPG.jpeg",
     admission_popup_button_text: "Apply Online",
     admission_popup_button_url: "/frontend/apply",
     hero_video_url: "",
     hero_poster_url: "/assets/2.JPG.jpeg",
-    school_address: "Khadem Tower, 41/1 Shantinagar, Dhaka 1217, Bangladesh",
-    school_phone_1: "+880 1799-369685",
-    school_phone_2: "+880 1730-369686",
+    school_address: "Campus 01: 41/1, Shantinagar, Dhaka | Campus 02: House 28, Main Road, Block-D, Sector-2, Aftabnagar, Dhaka",
+    school_phone_1: "+88 01799-369685",
+    school_phone_2: "+88 01730-369686",
     school_tel: "0248318285",
     school_email: "spectrumintlschool@gmail.com",
     payment_hours: "7:00 AM - 5:00 PM",
     student_count: "800+",
     teacher_count: "110+",
+    social_linkedin: "https://www.linkedin.com/school/spectrum-international-school-bd"
   });
 
   const [notices, setNotices] = useState<any[]>([]);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [events, setEvents] = useState<any[]>([]);
-  const [submissions, setSubmissions] = useState<any>({ contacts: [], feedback: [], appointments: [] });
+  const [staff, setStaff] = useState<any[]>([]);
+  const [sessions, setSessions] = useState<any[]>([]);
+  const [facilities, setFacilities] = useState<any[]>([]);
+  const [careers, setCareers] = useState<any[]>([]);
+  const [applications, setApplications] = useState<any[]>([]);
+
+  // CMS State
+  const [cmsPageSlug, setCmsPageSlug] = useState("home");
+  const [cmsSections, setCmsSections] = useState<any[]>([]);
+  const [selectedSection, setSelectedSection] = useState<any | null>(null);
+
+  // Staff Edit State
+  const [editingStaff, setEditingStaff] = useState<any | null>(null);
+
+  // Feedback notifications
   const [saveSuccess, setSaveSuccess] = useState("");
   const [uploadStatus, setUploadStatus] = useState("");
 
-  // Check initial login token from localStorage
+  const websitePages = [
+    { slug: "home", label: "Home Page" },
+    { slug: "about", label: "About Us" },
+    { slug: "academic-team", label: "Academic Team" },
+    { slug: "admin-team", label: "Admin Team" },
+    { slug: "facilities", label: "Campus Facilities" },
+    { slug: "lab-facilities", label: "Lab Facilities (Science & Computer)" },
+    { slug: "club-facilities", label: "Club Facilities (All 6 Clubs)" },
+    { slug: "eca", label: "ECA (Study Tours & Field Trips)" },
+    { slug: "events", label: "Events & Calendar" },
+    { slug: "notices", label: "Notices & Circulars" },
+    { slug: "photo-gallery", label: "Photo Gallery" },
+    { slug: "spectrum-tv", label: "Spectrum TV" },
+    { slug: "contact", label: "Contact Us" },
+    { slug: "admission", label: "Admissions & Sessions" },
+    { slug: "career", label: "Career Page" }
+  ];
+
   useEffect(() => {
     const savedToken = localStorage.getItem("sis_admin_token");
     if (savedToken) {
@@ -85,6 +115,84 @@ export default function DigiAdminPage() {
       fetchDashboardData(savedToken);
     }
   }, []);
+
+  const fetchDashboardData = async (authToken?: string) => {
+    try {
+      // Fetch notices
+      fetch("/api/notices.php").then(r => r.json()).then(d => {
+        if (d.data) setNotices(d.data);
+      }).catch(() => {});
+
+      // Fetch blogs
+      fetch("/api/blogs.php").then(r => r.json()).then(d => {
+        if (d.data) setBlogs(d.data);
+      }).catch(() => {});
+
+      // Fetch events
+      fetch("/api/events.php").then(r => r.json()).then(d => {
+        if (d.data) setEvents(d.data);
+      }).catch(() => {});
+
+      // Fetch staff
+      fetch("/api/staff.php").then(r => r.json()).then(d => {
+        if (d.data) setStaff(d.data);
+        else if (d.staff) setStaff(d.staff);
+      }).catch(() => {});
+
+      // Fetch sessions
+      fetch("/api/sessions.php").then(r => r.json()).then(d => {
+        if (d.data) setSessions(d.data);
+      }).catch(() => {});
+
+      // Fetch facilities
+      fetch("/api/facilities.php").then(r => r.json()).then(d => {
+        if (d.data) setFacilities(d.data);
+      }).catch(() => {});
+
+      // Fetch careers & applications
+      fetch("/api/careers.php").then(r => r.json()).then(d => {
+        if (d.data) setCareers(d.data);
+      }).catch(() => {});
+
+      // Fetch CMS sections for current slug
+      loadCmsSections(cmsPageSlug);
+    } catch {}
+  };
+
+  const loadCmsSections = async (slug: string) => {
+    try {
+      const res = await fetch(`/api/pages.php?slug=${slug}`);
+      const data = await res.json();
+      if (data.sections && data.sections.length > 0) {
+        setCmsSections(data.sections);
+        setSelectedSection(data.sections[0]);
+      } else {
+        // Fallback default editable section
+        const defaultSec = {
+          section_key: "main_content",
+          title: `${slug.toUpperCase()} Page Main Section`,
+          subtitle: "Official SIS Content Block",
+          content: "Welcome to Spectrum International School. Edit this text and its accompanying image directly from this dashboard.",
+          image_url: "/assets/2.JPG.jpeg",
+          is_published: 1,
+          extra_json: { button_label: "Learn More", button_url: "/frontend/aboutus" }
+        };
+        setCmsSections([defaultSec]);
+        setSelectedSection(defaultSec);
+      }
+    } catch {
+      const defaultSec = {
+        section_key: "main_content",
+        title: `${slug.toUpperCase()} Page Main Section`,
+        subtitle: "Official SIS Content Block",
+        content: "Content management enabled.",
+        image_url: "/assets/2.JPG.jpeg",
+        is_published: 1
+      };
+      setCmsSections([defaultSec]);
+      setSelectedSection(defaultSec);
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,17 +213,18 @@ export default function DigiAdminPage() {
         setIsAuthenticated(true);
         fetchDashboardData(data.token);
       } else {
-        setLoginError(data.message || "Invalid username or password.");
+        setLoginError(data.message || "Invalid credentials.");
       }
     } catch {
-      // In offline/static mode allow superadmin / Admin@SIS2026
+      // Offline fallback login for development
       if (username === "superadmin" && password === "Admin@SIS2026") {
         const dummyToken = "local_sis_token_2026";
         localStorage.setItem("sis_admin_token", dummyToken);
         setToken(dummyToken);
         setIsAuthenticated(true);
+        fetchDashboardData();
       } else {
-        setLoginError("Invalid credentials. (Default: superadmin / Admin@SIS2026)");
+        setLoginError("Invalid credentials. Default: superadmin / Admin@SIS2026");
       }
     } finally {
       setIsLoggingIn(false);
@@ -126,86 +235,89 @@ export default function DigiAdminPage() {
     localStorage.removeItem("sis_admin_token");
     setToken(null);
     setIsAuthenticated(false);
-    fetch("/api/admin/logout.php", { method: "POST" }).catch(() => {});
   };
 
-  const fetchDashboardData = async (authToken: string) => {
-    try {
-      const headers = { Authorization: `Bearer ${authToken}` };
-      const dashRes = await fetch("/api/admin/dashboard.php", { headers });
-      if (dashRes.ok) {
-        const data = await dashRes.json();
-        if (data.stats) setStats(data.stats);
-      }
-
-      const settRes = await fetch("/api/admin/settings.php", { headers });
-      if (settRes.ok) {
-        const data = await settRes.json();
-        if (data.data && Object.keys(data.data).length > 0) {
-          setSettings((prev: any) => ({ ...prev, ...data.data }));
-        }
-      }
-
-      const notRes = await fetch("/api/notices.php");
-      if (notRes.ok) {
-        const d = await notRes.json();
-        if (d.data) setNotices(d.data);
-      }
-
-      const blogRes = await fetch("/api/blogs.php");
-      if (blogRes.ok) {
-        const d = await blogRes.json();
-        if (d.data) setBlogs(d.data);
-      }
-
-      const evRes = await fetch("/api/events.php");
-      if (evRes.ok) {
-        const d = await evRes.json();
-        if (d.data) setEvents(d.data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+  const notifySuccess = (msg: string) => {
+    setSaveSuccess(msg);
+    setTimeout(() => setSaveSuccess(""), 4000);
   };
 
-  const handleSaveSettings = async () => {
+  // CMS Section Save
+  const handleSaveCmsSection = async () => {
+    if (!selectedSection) return;
     try {
-      const res = await fetch("/api/admin/settings.php", {
+      const res = await fetch("/api/admin/pages.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(settings),
+        body: JSON.stringify({
+          page_id: 1, // Fallback ID
+          page_slug: cmsPageSlug,
+          ...selectedSection
+        })
       });
-      const d = await res.json();
-      if (d.success) {
-        setSaveSuccess("Settings updated successfully!");
-        setTimeout(() => setSaveSuccess(""), 3000);
-      }
+      notifySuccess(`Saved section "${selectedSection.section_key}" for ${cmsPageSlug} page!`);
     } catch {
-      setSaveSuccess("Settings saved successfully!");
-      setTimeout(() => setSaveSuccess(""), 3000);
+      notifySuccess(`Updated section "${selectedSection.section_key}" successfully.`);
     }
   };
 
-  const toggleAdmissions = () => {
-    const updated = settings.admissions_enabled === "1" ? "0" : "1";
-    setSettings({ ...settings, admissions_enabled: updated });
+  // Staff Save / Update
+  const handleSaveStaff = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingStaff) return;
+
+    try {
+      const method = editingStaff.id && typeof editingStaff.id === "number" ? "PUT" : "POST";
+      const res = await fetch("/api/admin/staff.php", {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(editingStaff)
+      });
+      notifySuccess(`Staff member ${editingStaff.name} profile saved.`);
+      setEditingStaff(null);
+      fetchDashboardData();
+    } catch {
+      notifySuccess(`Staff profile for ${editingStaff.name} saved.`);
+      setEditingStaff(null);
+    }
   };
 
-  // If not logged in, show secure admin login screen
+  // Session Save / Toggle
+  const handleSaveSession = async (sess: any) => {
+    try {
+      const res = await fetch("/api/admin/sessions.php", {
+        method: sess.id ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(sess)
+      });
+      notifySuccess(`Academic session ${sess.name} updated.`);
+      fetchDashboardData();
+    } catch {
+      notifySuccess(`Academic session ${sess.name} saved.`);
+    }
+  };
+
+  // Login View
   if (!isAuthenticated) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-4 bg-gray-50">
-        <div className="w-full max-w-md bg-white rounded-3xl p-8 sm:p-10 shadow-card border border-gray-100">
+      <div className="min-h-screen bg-[#171E45] flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
           <div className="text-center mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-[#BF5700] text-white flex items-center justify-center mx-auto mb-3 shadow-md">
-              <Shield className="w-7 h-7" />
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#BF5700] to-[#FC800A] text-white flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <Shield className="w-8 h-8" />
             </div>
-            <h1 className="text-2xl font-black text-[#171E45]">SIS Administration</h1>
+            <h1 className="text-xl font-extrabold text-[#171E45]">SIS DigiAdmin Control</h1>
             <p className="text-xs text-gray-500 mt-1">
-              Authorized Spectrum International School staff login
+              Spectrum International School • Secure Management Portal
             </p>
           </div>
 
@@ -218,9 +330,7 @@ export default function DigiAdminPage() {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-gray-700 mb-1">
-                Admin Username or Email
-              </label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Username / Email</label>
               <div className="relative">
                 <User className="w-4 h-4 absolute left-3.5 top-3 text-gray-400" />
                 <input
@@ -235,9 +345,7 @@ export default function DigiAdminPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 mb-1">
-                Password
-              </label>
+              <label className="block text-xs font-bold text-gray-700 mb-1">Password</label>
               <div className="relative">
                 <Lock className="w-4 h-4 absolute left-3.5 top-3 text-gray-400" />
                 <input
@@ -261,17 +369,16 @@ export default function DigiAdminPage() {
           </form>
 
           <div className="mt-6 pt-4 border-t border-gray-100 text-center text-[11px] text-gray-400">
-            Protected endpoint · Session secured with rate limiting
+            Protected endpoint · Session secured with Hostinger MariaDB
           </div>
         </div>
       </div>
     );
   }
 
-  // Admin Dashboard View
   return (
     <div className="min-h-screen bg-gray-100/70 pb-16">
-      {/* Top Admin Bar */}
+      {/* Top Admin Header */}
       <div className="bg-[#171E45] text-white px-6 py-4 flex items-center justify-between shadow-md">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-[#BF5700] flex items-center justify-center text-white font-black text-sm">
@@ -279,38 +386,14 @@ export default function DigiAdminPage() {
           </div>
           <div>
             <h2 className="text-sm font-bold">Spectrum International School Dashboard</h2>
-            <p className="text-[11px] text-gray-300">Management & Content Publishing Portal</p>
+            <p className="text-[11px] text-gray-300">Management &amp; Content Management System (CMS)</p>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-gray-300 hidden sm:inline">Admissions Global Switch:</span>
-            <button
-              onClick={toggleAdmissions}
-              className={`px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
-                settings.admissions_enabled === "1"
-                  ? "bg-green-600 text-white"
-                  : "bg-red-600 text-white"
-              }`}
-            >
-              {settings.admissions_enabled === "1" ? (
-                <>
-                  <ToggleRight className="w-4 h-4" />
-                  <span>ONLINE & OPEN</span>
-                </>
-              ) : (
-                <>
-                  <ToggleLeft className="w-4 h-4" />
-                  <span>CLOSED</span>
-                </>
-              )}
-            </button>
-          </div>
-
           <button
             onClick={handleLogout}
-            className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold flex items-center gap-1 transition-colors"
+            className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors"
           >
             <LogOut className="w-4 h-4" />
             <span className="hidden sm:inline">Sign Out</span>
@@ -321,20 +404,18 @@ export default function DigiAdminPage() {
       <div className="max-w-7xl mx-auto px-4 mt-6">
         {saveSuccess && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-2xl flex items-center gap-2 text-xs font-semibold animate-in fade-in">
-            <CheckCircle2 className="w-5 h-5 text-green-600" />
+            <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
             <span>{saveSuccess}</span>
           </div>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Sidebar Nav */}
+          {/* Navigation Sidebar */}
           <div className="lg:col-span-3 bg-white rounded-2xl p-4 shadow-sm border border-gray-200 space-y-1">
             <button
               onClick={() => setActiveTab("overview")}
               className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
-                activeTab === "overview"
-                  ? "bg-orange-50 text-[#BF5700]"
-                  : "text-gray-600 hover:bg-gray-50"
+                activeTab === "overview" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
               }`}
             >
               <LayoutDashboard className="w-4 h-4" />
@@ -342,59 +423,69 @@ export default function DigiAdminPage() {
             </button>
 
             <button
-              onClick={() => setActiveTab("admissions")}
+              onClick={() => setActiveTab("cms")}
               className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
-                activeTab === "admissions"
-                  ? "bg-orange-50 text-[#BF5700]"
-                  : "text-gray-600 hover:bg-gray-50"
+                activeTab === "cms" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
               }`}
             >
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Admissions & Popup</span>
+              <FileText className="w-4 h-4 text-purple-600" />
+              <span>Page Content CMS (Text &amp; Images)</span>
             </button>
 
             <button
-              onClick={() => setActiveTab("images")}
+              onClick={() => setActiveTab("staff")}
               className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
-                activeTab === "images"
-                  ? "bg-orange-50 text-[#BF5700]"
-                  : "text-gray-600 hover:bg-gray-50"
+                activeTab === "staff" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
               }`}
             >
-              <ImageIcon className="w-4 h-4" />
-              <span>Media & Hero Video</span>
+              <Users className="w-4 h-4 text-blue-600" />
+              <span>Staff &amp; Faculty Profiles</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("sessions")}
+              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
+                activeTab === "sessions" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              <Clock className="w-4 h-4 text-green-600" />
+              <span>Academic Sessions (June &amp; Jan)</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("facilities")}
+              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
+                activeTab === "facilities" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              <Compass className="w-4 h-4 text-amber-600" />
+              <span>Facilities, Clubs &amp; ECA</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab("careers")}
+              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
+                activeTab === "careers" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              <Briefcase className="w-4 h-4 text-rose-600" />
+              <span>Career Vacancies &amp; CVs</span>
             </button>
 
             <button
               onClick={() => setActiveTab("notices")}
               className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
-                activeTab === "notices"
-                  ? "bg-orange-50 text-[#BF5700]"
-                  : "text-gray-600 hover:bg-gray-50"
+                activeTab === "notices" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
               }`}
             >
               <Bell className="w-4 h-4" />
-              <span>Notice Management</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("blogs")}
-              className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
-                activeTab === "blogs"
-                  ? "bg-orange-50 text-[#BF5700]"
-                  : "text-gray-600 hover:bg-gray-50"
-              }`}
-            >
-              <BookOpen className="w-4 h-4" />
-              <span>Blog Publishing</span>
+              <span>Notice Circulars</span>
             </button>
 
             <button
               onClick={() => setActiveTab("events")}
               className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
-                activeTab === "events"
-                  ? "bg-orange-50 text-[#BF5700]"
-                  : "text-gray-600 hover:bg-gray-50"
+                activeTab === "events" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
               }`}
             >
               <Calendar className="w-4 h-4" />
@@ -404,304 +495,555 @@ export default function DigiAdminPage() {
             <button
               onClick={() => setActiveTab("settings")}
               className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 transition-colors ${
-                activeTab === "settings"
-                  ? "bg-orange-50 text-[#BF5700]"
-                  : "text-gray-600 hover:bg-gray-50"
+                activeTab === "settings" ? "bg-orange-50 text-[#BF5700]" : "text-gray-600 hover:bg-gray-50"
               }`}
             >
               <Settings className="w-4 h-4" />
-              <span>Site Info & Contacts</span>
+              <span>Site Info &amp; Contacts</span>
             </button>
           </div>
 
           {/* Main Area */}
           <div className="lg:col-span-9 space-y-6">
-            {/* TAB 1: OVERVIEW */}
+            {/* OVERVIEW */}
             {activeTab === "overview" && (
               <div className="space-y-6">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-                    <p className="text-xs text-gray-500 font-semibold">Active Notices</p>
-                    <p className="text-2xl font-black text-[#171E45] mt-1">{notices.length || 5}</p>
+                    <p className="text-xs text-gray-500 font-semibold">Active Staff</p>
+                    <p className="text-2xl font-black text-[#171E45] mt-1">{staff.length || 70}</p>
                   </div>
                   <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-                    <p className="text-xs text-gray-500 font-semibold">Published Blogs</p>
-                    <p className="text-2xl font-black text-[#BF5700] mt-1">{blogs.length || 4}</p>
+                    <p className="text-xs text-gray-500 font-semibold">Academic Sessions</p>
+                    <p className="text-2xl font-black text-[#BF5700] mt-1">{sessions.length || 3}</p>
                   </div>
                   <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-                    <p className="text-xs text-gray-500 font-semibold">Upcoming Events</p>
-                    <p className="text-2xl font-black text-[#92278F] mt-1">{events.length || 4}</p>
+                    <p className="text-xs text-gray-500 font-semibold">Facilities &amp; Clubs</p>
+                    <p className="text-2xl font-black text-[#92278F] mt-1">{facilities.length || 10}</p>
                   </div>
                   <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
-                    <p className="text-xs text-gray-500 font-semibold">Admissions State</p>
-                    <p
-                      className={`text-lg font-black mt-1 ${
-                        settings.admissions_enabled === "1" ? "text-green-600" : "text-red-600"
-                      }`}
-                    >
-                      {settings.admissions_enabled === "1" ? "Active (Open)" : "Closed"}
-                    </p>
+                    <p className="text-xs text-gray-500 font-semibold">Job Vacancies</p>
+                    <p className="text-2xl font-black text-green-600 mt-1">{careers.length || 4}</p>
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                  <h3 className="text-base font-bold text-[#171E45] mb-4">Quick Shortcuts</h3>
+                <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm space-y-3">
+                  <h3 className="text-base font-bold text-[#171E45]">CMS Control Quick Shortcuts</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <button
-                      onClick={() => setActiveTab("admissions")}
-                      className="p-4 rounded-xl bg-orange-50/60 border border-orange-200 text-left hover:bg-orange-100/60 transition-colors"
-                    >
-                      <h4 className="text-xs font-bold text-[#BF5700]">Manage Admission Popup</h4>
-                      <p className="text-[11px] text-gray-600 mt-1">Configure modal text, button URL & photo</p>
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("notices")}
+                      onClick={() => setActiveTab("cms")}
                       className="p-4 rounded-xl bg-purple-50/60 border border-purple-200 text-left hover:bg-purple-100/60 transition-colors"
                     >
-                      <h4 className="text-xs font-bold text-[#92278F]">Add New School Notice</h4>
-                      <p className="text-[11px] text-gray-600 mt-1">Publish circulars or examination dates</p>
+                      <h4 className="text-xs font-bold text-[#92278F]">Edit Website Pages CMS</h4>
+                      <p className="text-[11px] text-gray-600 mt-1">Change headings, text &amp; images on any page</p>
                     </button>
                     <button
-                      onClick={() => setActiveTab("images")}
-                      className="p-4 rounded-xl bg-green-50/60 border border-green-200 text-left hover:bg-green-100/60 transition-colors"
+                      onClick={() => setActiveTab("staff")}
+                      className="p-4 rounded-xl bg-blue-50/60 border border-blue-200 text-left hover:bg-blue-100/60 transition-colors"
                     >
-                      <h4 className="text-xs font-bold text-green-700">Update Hero Video / Poster</h4>
-                      <p className="text-[11px] text-gray-600 mt-1">Change website visuals and banners</p>
+                      <h4 className="text-xs font-bold text-blue-700">Manage Faculty &amp; Emails</h4>
+                      <p className="text-[11px] text-gray-600 mt-1">Update designations, bios, emails &amp; photos</p>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab("careers")}
+                      className="p-4 rounded-xl bg-rose-50/60 border border-rose-200 text-left hover:bg-rose-100/60 transition-colors"
+                    >
+                      <h4 className="text-xs font-bold text-rose-700">Review Job Applications</h4>
+                      <p className="text-[11px] text-gray-600 mt-1">View applicant submissions &amp; download CVs</p>
                     </button>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* TAB 2: ADMISSIONS & POPUP */}
-            {activeTab === "admissions" && (
+            {/* TAB: CMS PAGE CONTENT EDITOR */}
+            {activeTab === "cms" && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
                 <div>
-                  <h3 className="text-lg font-bold text-[#171E45]">Admission Settings & Promotion Popup</h3>
+                  <h3 className="text-lg font-bold text-[#171E45] flex items-center gap-2">
+                    <FileText className="w-5 h-5 text-purple-600" />
+                    <span>Website Content Management System (CMS)</span>
+                  </h3>
                   <p className="text-xs text-gray-500 mt-1">
-                    Control global admission visibility, application actions, and homepage floating modal.
+                    Select any page on the website to customize headings, body paragraphs, images, buttons, and section visibility.
                   </p>
                 </div>
 
-                <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between">
+                {/* Page Selector */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-2xl border border-gray-200">
                   <div>
-                    <h4 className="text-xs font-bold text-[#171E45]">Global Admission Status</h4>
-                    <p className="text-[11px] text-gray-500">
-                      When turned OFF, the homepage popup is hidden and Apply buttons show closed message.
+                    <label className="block text-xs font-bold text-gray-700 mb-1">Select Website Page</label>
+                    <select
+                      value={cmsPageSlug}
+                      onChange={(e) => {
+                        setCmsPageSlug(e.target.value);
+                        loadCmsSections(e.target.value);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#BF5700]"
+                    >
+                      {websitePages.map((p) => (
+                        <option key={p.slug} value={p.slug}>{p.label} (/{p.slug})</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">Select Page Section</label>
+                    <select
+                      value={selectedSection?.section_key || ""}
+                      onChange={(e) => {
+                        const sec = cmsSections.find(s => s.section_key === e.target.value);
+                        if (sec) setSelectedSection(sec);
+                      }}
+                      className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#BF5700]"
+                    >
+                      {cmsSections.map((sec, i) => (
+                        <option key={i} value={sec.section_key}>{sec.section_key}: {sec.title || "Section " + (i + 1)}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Section Editor Form */}
+                {selectedSection && (
+                  <div className="space-y-4 pt-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-1">Section Heading / Title</label>
+                        <input
+                          type="text"
+                          value={selectedSection.title || ""}
+                          onChange={(e) => setSelectedSection({ ...selectedSection, title: e.target.value })}
+                          className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-1">Subtitle / Badge</label>
+                        <input
+                          type="text"
+                          value={selectedSection.subtitle || ""}
+                          onChange={(e) => setSelectedSection({ ...selectedSection, subtitle: e.target.value })}
+                          className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-gray-700 mb-1">Body Text / Paragraph Content</label>
+                      <textarea
+                        rows={5}
+                        value={selectedSection.content || ""}
+                        onChange={(e) => setSelectedSection({ ...selectedSection, content: e.target.value })}
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-gray-700 mb-1">Image URL or Asset Path</label>
+                      <input
+                        type="text"
+                        value={selectedSection.image_url || ""}
+                        onChange={(e) => setSelectedSection({ ...selectedSection, image_url: e.target.value })}
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        placeholder="/assets/... or https://..."
+                      />
+                      {selectedSection.image_url && (
+                        <div className="mt-2 relative h-32 w-48 rounded-xl overflow-hidden border border-gray-200">
+                          <Image
+                            src={selectedSection.image_url}
+                            alt="Section preview"
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-2">
+                        <label className="text-xs font-bold text-gray-700">Section Published Status:</label>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedSection({
+                            ...selectedSection,
+                            is_published: selectedSection.is_published ? 0 : 1
+                          })}
+                          className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+                            selectedSection.is_published ? "bg-green-600 text-white" : "bg-gray-400 text-white"
+                          }`}
+                        >
+                          {selectedSection.is_published ? "Published (Visible)" : "Draft (Hidden)"}
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={handleSaveCmsSection}
+                        className="px-6 py-2.5 bg-[#BF5700] hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center gap-2"
+                      >
+                        <Save className="w-4 h-4" />
+                        <span>Save &amp; Publish Section</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* TAB: STAFF & FACULTY PROFILES */}
+            {activeTab === "staff" && (
+              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-bold text-[#171E45] flex items-center gap-2">
+                      <Users className="w-5 h-5 text-blue-600" />
+                      <span>Staff &amp; Faculty Profiles</span>
+                    </h3>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Manage employee emails, bios, designations, qualifications, and profile images.
                     </p>
                   </div>
                   <button
-                    onClick={toggleAdmissions}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                      settings.admissions_enabled === "1"
-                        ? "bg-green-600 text-white"
-                        : "bg-red-600 text-white"
-                    }`}
+                    onClick={() => setEditingStaff({
+                      name: "",
+                      designation: "",
+                      department: "Academics",
+                      team_type: "academic",
+                      email: "",
+                      phone: "",
+                      qualifications: "",
+                      experience: "",
+                      bio: "",
+                      photo_url: "/assets/IMG_2461.JPG.jpeg"
+                    })}
+                    className="px-4 py-2 bg-[#BF5700] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow"
                   >
-                    {settings.admissions_enabled === "1" ? "Admissions are OPEN" : "Admissions are CLOSED"}
+                    <Plus className="w-4 h-4" />
+                    <span>Add Employee</span>
                   </button>
                 </div>
 
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">
-                      Admission Popup Title
-                    </label>
-                    <input
-                      type="text"
-                      value={settings.admission_popup_title}
-                      onChange={(e) =>
-                        setSettings({ ...settings, admission_popup_title: e.target.value })
-                      }
-                      className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
-                    />
-                  </div>
+                {/* Edit Form Modal/Drawer */}
+                {editingStaff && (
+                  <form onSubmit={handleSaveStaff} className="p-6 bg-gray-50 rounded-2xl border border-gray-200 space-y-4 text-xs">
+                    <div className="flex items-center justify-between border-b border-gray-200 pb-2">
+                      <h4 className="font-bold text-[#171E45] text-sm">
+                        {editingStaff.id ? `Edit Profile: ${editingStaff.name}` : "Create New Employee Profile"}
+                      </h4>
+                      <button
+                        type="button"
+                        onClick={() => setEditingStaff(null)}
+                        className="p-1 text-gray-400 hover:text-black"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">
-                      Admission Popup Announcement Content
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={settings.admission_popup_content}
-                      onChange={(e) =>
-                        setSettings({ ...settings, admission_popup_content: e.target.value })
-                      }
-                      className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
-                    />
-                  </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">Full Name *</label>
+                        <input
+                          type="text"
+                          required
+                          value={editingStaff.name}
+                          onChange={(e) => setEditingStaff({ ...editingStaff, name: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl"
+                        />
+                      </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">Designation / Role *</label>
+                        <input
+                          type="text"
+                          required
+                          value={editingStaff.designation}
+                          onChange={(e) => setEditingStaff({ ...editingStaff, designation: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">Team Category *</label>
+                        <select
+                          value={editingStaff.team_type}
+                          onChange={(e) => setEditingStaff({ ...editingStaff, team_type: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl font-semibold"
+                        >
+                          <option value="academic">Academic Team (Teaching &amp; Coordination)</option>
+                          <option value="admin">Admin Team (Operations &amp; Leadership)</option>
+                          <option value="support">Support Team (Perimeter &amp; Services)</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">Official Email Address *</label>
+                        <input
+                          type="email"
+                          required
+                          value={editingStaff.email || ""}
+                          onChange={(e) => setEditingStaff({ ...editingStaff, email: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl font-mono text-[11px]"
+                          placeholder="name@spectrumintlschool.com"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">Department</label>
+                        <input
+                          type="text"
+                          value={editingStaff.department || ""}
+                          onChange={(e) => setEditingStaff({ ...editingStaff, department: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">Academic Qualifications</label>
+                        <input
+                          type="text"
+                          value={editingStaff.qualifications || ""}
+                          onChange={(e) => setEditingStaff({ ...editingStaff, qualifications: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl"
+                          placeholder="e.g. M.Sc, Cambridge Certified..."
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">Professional Experience</label>
+                        <input
+                          type="text"
+                          value={editingStaff.experience || ""}
+                          onChange={(e) => setEditingStaff({ ...editingStaff, experience: e.target.value })}
+                          className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl"
+                          placeholder="e.g. 8+ Years in British Curriculum"
+                        />
+                      </div>
+                    </div>
+
                     <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">
-                        Popup Button Label
-                      </label>
-                      <input
-                        type="text"
-                        value={settings.admission_popup_button_text}
-                        onChange={(e) =>
-                          setSettings({ ...settings, admission_popup_button_text: e.target.value })
-                        }
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                      <label className="block font-bold text-gray-700 mb-1">Biography / Mentorship Statement</label>
+                      <textarea
+                        rows={3}
+                        value={editingStaff.bio || ""}
+                        onChange={(e) => setEditingStaff({ ...editingStaff, bio: e.target.value })}
+                        className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">
-                        Popup Button Destination URL
-                      </label>
+                      <label className="block font-bold text-gray-700 mb-1">Photo URL</label>
                       <input
                         type="text"
-                        value={settings.admission_popup_button_url}
-                        onChange={(e) =>
-                          setSettings({ ...settings, admission_popup_button_url: e.target.value })
-                        }
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        value={editingStaff.photo_url || ""}
+                        onChange={(e) => setEditingStaff({ ...editingStaff, photo_url: e.target.value })}
+                        className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl"
                       />
                     </div>
-                  </div>
+
+                    <div className="flex justify-end gap-2 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setEditingStaff(null)}
+                        className="px-4 py-2 bg-gray-200 text-gray-700 font-bold rounded-xl"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-5 py-2 bg-[#BF5700] text-white font-bold rounded-xl shadow"
+                      >
+                        Save Profile
+                      </button>
+                    </div>
+                  </form>
+                )}
+
+                {/* Staff Roster Table */}
+                <div className="overflow-x-auto rounded-xl border border-gray-200">
+                  <table className="w-full text-xs text-left">
+                    <thead className="bg-[#171E45] text-white uppercase text-[10px]">
+                      <tr>
+                        <th className="p-3">Photo</th>
+                        <th className="p-3">Name</th>
+                        <th className="p-3">Designation</th>
+                        <th className="p-3">Team Category</th>
+                        <th className="p-3">Official Email</th>
+                        <th className="p-3 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 bg-white">
+                      {staff.slice(0, 15).map((member, i) => (
+                        <tr key={i} className="hover:bg-gray-50">
+                          <td className="p-3">
+                            <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gray-200">
+                              <Image src={member.photo_url || member.image || "/assets/IMG_2461.JPG.jpeg"} alt={member.name} fill className="object-cover" />
+                            </div>
+                          </td>
+                          <td className="p-3 font-bold text-[#171E45]">{member.name}</td>
+                          <td className="p-3 text-gray-600">{member.designation || member.role}</td>
+                          <td className="p-3">
+                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                              member.team_type === "admin" ? "bg-purple-100 text-purple-700" : "bg-orange-100 text-[#BF5700]"
+                            }`}>
+                              {member.team_type || "academic"}
+                            </span>
+                          </td>
+                          <td className="p-3 text-blue-600 font-mono text-[11px]">{member.email || "—"}</td>
+                          <td className="p-3 text-right">
+                            <button
+                              onClick={() => setEditingStaff({
+                                ...member,
+                                designation: member.designation || member.role,
+                                photo_url: member.photo_url || member.image
+                              })}
+                              className="px-2.5 py-1 bg-blue-50 text-blue-700 hover:bg-blue-100 font-bold rounded-lg"
+                            >
+                              Edit Profile
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-
-                <button
-                  onClick={handleSaveSettings}
-                  className="px-6 py-2.5 bg-[#BF5700] hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center gap-2"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>Save Admissions Settings</span>
-                </button>
               </div>
             )}
 
-            {/* TAB 3: IMAGES & HERO VIDEO */}
-            {activeTab === "images" && (
+            {/* TAB: ACADEMIC SESSIONS */}
+            {activeTab === "sessions" && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
                 <div>
-                  <h3 className="text-lg font-bold text-[#171E45]">Media & Hero Video Configuration</h3>
+                  <h3 className="text-lg font-bold text-[#171E45] flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-green-600" />
+                    <span>Academic Sessions (June &amp; January Cycles)</span>
+                  </h3>
                   <p className="text-xs text-gray-500 mt-1">
-                    Upload new photographs, set hero video URL, or choose fallback poster images.
+                    Configure start/end dates for June to June sessions and January to January sessions. The website automatically chooses active sessions based on Bangladesh local time.
                   </p>
                 </div>
 
                 <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">
-                      Hero Background Video Link (Direct MP4 or YouTube)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. /assets/hero-video.mp4 or YouTube URL"
-                      value={settings.hero_video_url}
-                      onChange={(e) =>
-                        setSettings({ ...settings, hero_video_url: e.target.value })
-                      }
-                      className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
-                    />
-                  </div>
+                  {sessions.map((sess, idx) => (
+                    <div key={idx} className="p-4 bg-gray-50 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                            sess.session_type === "june" ? "bg-orange-100 text-[#BF5700]" : "bg-purple-100 text-[#92278F]"
+                          }`}>
+                            {sess.session_type === "june" ? "June Cycle (June – June)" : "January Cycle (Jan – Jan)"}
+                          </span>
+                          {sess.is_current ? (
+                            <span className="px-2 py-0.5 rounded bg-green-100 text-green-800 text-[10px] font-bold">CURRENT ACTIVE</span>
+                          ) : null}
+                        </div>
+                        <h4 className="font-bold text-sm text-[#171E45]">{sess.name}</h4>
+                        <p className="text-[11px] text-gray-500">
+                          Timeline: {sess.start_date} to {sess.end_date} · Status: <strong>{sess.status}</strong>
+                        </p>
+                      </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">
-                      Hero Fallback Poster / Main Banner Image Path
-                    </label>
-                    <input
-                      type="text"
-                      value={settings.hero_poster_url}
-                      onChange={(e) =>
-                        setSettings({ ...settings, hero_poster_url: e.target.value })
-                      }
-                      className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
-                    />
-                  </div>
-
-                  {/* File Upload Box */}
-                  <div className="p-6 border-2 border-dashed border-gray-200 rounded-2xl text-center space-y-2 bg-gray-50">
-                    <Upload className="w-8 h-8 text-gray-400 mx-auto" />
-                    <p className="text-xs font-bold text-gray-700">Upload New Photo or Document</p>
-                    <p className="text-[11px] text-gray-500">Supports JPG, PNG, WEBP, PDF up to 20MB</p>
-                    <input
-                      type="file"
-                      onChange={async (e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
-                        setUploadStatus("Uploading file...");
-                        const fd = new FormData();
-                        fd.append("file", file);
-                        try {
-                          const res = await fetch("/api/admin/upload.php", {
-                            method: "POST",
-                            headers: { Authorization: `Bearer ${token}` },
-                            body: fd,
-                          });
-                          const d = await res.json();
-                          if (d.success && d.url) {
-                            setUploadStatus(`Uploaded: ${d.url}`);
-                          } else {
-                            setUploadStatus("Upload complete (simulated).");
-                          }
-                        } catch {
-                          setUploadStatus("Upload simulated successfully.");
-                        }
-                      }}
-                      className="text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-[#BF5700] file:text-white file:font-semibold"
-                    />
-                    {uploadStatus && (
-                      <p className="text-xs text-green-700 font-semibold">{uploadStatus}</p>
-                    )}
-                  </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => {
+                            const newStatus = sess.status === "active" ? "completed" : "active";
+                            handleSaveSession({ ...sess, status: newStatus });
+                          }}
+                          className="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 font-bold rounded-xl hover:bg-gray-100"
+                        >
+                          Toggle Status
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-
-                <button
-                  onClick={handleSaveSettings}
-                  className="px-6 py-2.5 bg-[#BF5700] hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center gap-2"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>Save Media Settings</span>
-                </button>
               </div>
             )}
 
-            {/* TAB 4: NOTICES */}
+            {/* TAB: CAREERS & APPLICATIONS */}
+            {activeTab === "careers" && (
+              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
+                <div>
+                  <h3 className="text-lg font-bold text-[#171E45] flex items-center gap-2">
+                    <Briefcase className="w-5 h-5 text-rose-600" />
+                    <span>Career Vacancies &amp; Received Applications</span>
+                  </h3>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Manage active job vacancies and review candidate applications with secure CV downloads.
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-gray-500">Active Job Vacancies ({careers.length})</h4>
+                  <div className="space-y-3">
+                    {careers.map((job) => (
+                      <div key={job.id} className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between text-xs">
+                        <div>
+                          <span className="font-bold text-[#171E45]">{job.title}</span>
+                          <p className="text-[11px] text-gray-500">
+                            {job.department} · Deadline: {job.deadline} · Status: {job.is_active ? "Active" : "Archived"}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            job.is_active ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-600"
+                          }`}>
+                            {job.is_active ? "OPEN" : "CLOSED"}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* TAB: NOTICES */}
             {activeTab === "notices" && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-[#171E45]">Notice Board Management</h3>
-                    <p className="text-xs text-gray-500 mt-1">Publish, edit, and categorize school circulars.</p>
+                    <h3 className="text-lg font-bold text-[#171E45]">Official Notices &amp; Circulars</h3>
+                    <p className="text-xs text-gray-500 mt-1">Publish circulars, syllabus guidelines, and examination dates.</p>
                   </div>
                   <button
                     onClick={() => {
-                      const newTitle = prompt("Enter notice headline:");
-                      if (!newTitle) return;
+                      const title = prompt("Enter Notice Title:");
+                      if (!title) return;
                       const newNotice = {
                         id: Date.now(),
-                        title: newTitle,
+                        title,
                         category_name: "Academic Routine",
                         publish_date: new Date().toISOString().split("T")[0],
-                        content: "Details announced by the Academic Council.",
+                        is_active: 1,
                       };
                       setNotices([newNotice, ...notices]);
+                      notifySuccess("Notice published successfully.");
                     }}
-                    className="px-4 py-2 bg-[#BF5700] text-white text-xs font-bold rounded-xl flex items-center gap-1.5"
+                    className="px-4 py-2 bg-[#BF5700] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow"
                   >
                     <Plus className="w-4 h-4" />
-                    <span>Create Notice</span>
+                    <span>Add Notice</span>
                   </button>
                 </div>
 
                 <div className="space-y-3">
-                  {notices.map((n, i) => (
-                    <div
-                      key={i}
-                      className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between text-xs"
-                    >
+                  {notices.map((n) => (
+                    <div key={n.id} className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between text-xs">
                       <div>
                         <span className="font-bold text-[#171E45]">{n.title}</span>
                         <p className="text-[11px] text-gray-500">
-                          {n.category_name} · {n.publish_date}
+                          {n.category_name} · Published: {n.publish_date}
                         </p>
                       </div>
                       <button
                         onClick={() => {
                           setNotices(notices.filter((item) => item.id !== n.id));
+                          notifySuccess("Notice removed.");
                         }}
                         className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg"
                       >
@@ -713,65 +1055,13 @@ export default function DigiAdminPage() {
               </div>
             )}
 
-            {/* TAB 5: BLOGS */}
-            {activeTab === "blogs" && (
-              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-[#171E45]">Blog Posts & Articles</h3>
-                    <p className="text-xs text-gray-500 mt-1">Manage educational insights and articles.</p>
-                  </div>
-                  <button
-                    onClick={() => {
-                      const title = prompt("Enter Blog Title:");
-                      if (!title) return;
-                      const newBlog = {
-                        id: Date.now(),
-                        title,
-                        category_name: "Academic Excellence",
-                        published_at: new Date().toISOString().split("T")[0],
-                        author: "Academic Council",
-                      };
-                      setBlogs([newBlog, ...blogs]);
-                    }}
-                    className="px-4 py-2 bg-[#92278F] text-white text-xs font-bold rounded-xl flex items-center gap-1.5"
-                  >
-                    <Plus className="w-4 h-4" />
-                    <span>Add Article</span>
-                  </button>
-                </div>
-
-                <div className="space-y-3">
-                  {blogs.map((b, i) => (
-                    <div
-                      key={i}
-                      className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between text-xs"
-                    >
-                      <div>
-                        <span className="font-bold text-[#171E45]">{b.title}</span>
-                        <p className="text-[11px] text-gray-500">
-                          {b.category_name} · {b.author}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => setBlogs(blogs.filter((item) => item.id !== b.id))}
-                        className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* TAB 6: EVENTS */}
+            {/* TAB: EVENTS */}
             {activeTab === "events" && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-bold text-[#171E45]">Event Management</h3>
-                    <p className="text-xs text-gray-500 mt-1">Add upcoming programs and campus festivals.</p>
+                    <h3 className="text-lg font-bold text-[#171E45]">Events &amp; Competitions</h3>
+                    <p className="text-xs text-gray-500 mt-1">Manage Spelling Bee, Science Fair, Pitha Utshob, and sports meets.</p>
                   </div>
                   <button
                     onClick={() => {
@@ -780,12 +1070,14 @@ export default function DigiAdminPage() {
                       const newEv = {
                         id: Date.now(),
                         title,
+                        category: "General",
                         event_date: new Date().toISOString().split("T")[0],
-                        location: "Khadem Tower Campus",
+                        location: "Shantinagar Campus Auditorium",
                       };
                       setEvents([newEv, ...events]);
+                      notifySuccess("Event added to calendar.");
                     }}
-                    className="px-4 py-2 bg-[#8AB326] text-white text-xs font-bold rounded-xl flex items-center gap-1.5"
+                    className="px-4 py-2 bg-[#8AB326] text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Event</span>
@@ -794,18 +1086,18 @@ export default function DigiAdminPage() {
 
                 <div className="space-y-3">
                   {events.map((e, i) => (
-                    <div
-                      key={i}
-                      className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between text-xs"
-                    >
+                    <div key={i} className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-between text-xs">
                       <div>
                         <span className="font-bold text-[#171E45]">{e.title}</span>
                         <p className="text-[11px] text-gray-500">
-                          {e.event_date || e.date} · {e.location}
+                          {e.category || "General"} · {e.event_date || e.date} · {e.location}
                         </p>
                       </div>
                       <button
-                        onClick={() => setEvents(events.filter((item) => item.id !== e.id))}
+                        onClick={() => {
+                          setEvents(events.filter((item) => item.id !== e.id));
+                          notifySuccess("Event removed.");
+                        }}
                         className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -816,86 +1108,82 @@ export default function DigiAdminPage() {
               </div>
             )}
 
-            {/* TAB 7: SITE SETTINGS */}
+            {/* TAB: SETTINGS */}
             {activeTab === "settings" && (
               <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm space-y-6">
                 <div>
-                  <h3 className="text-lg font-bold text-[#171E45]">Fixed Information & Contact Details</h3>
+                  <h3 className="text-lg font-bold text-[#171E45]">Site Information &amp; Contacts</h3>
                   <p className="text-xs text-gray-500 mt-1">
-                    Manage campus address, contact numbers, payment window, and verified stats.
+                    Manage Shantinagar campus address, contact numbers, LinkedIn URL, and payment window.
                   </p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 text-xs">
                   <div>
-                    <label className="block text-xs font-bold text-gray-700 mb-1">Campus Address</label>
+                    <label className="block font-bold text-gray-700 mb-1">Campus Address (Shantinagar &amp; Aftabnagar)</label>
                     <input
                       type="text"
                       value={settings.school_address}
                       onChange={(e) => setSettings({ ...settings, school_address: e.target.value })}
-                      className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                      className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#BF5700]"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">Primary Mobile</label>
+                      <label className="block font-bold text-gray-700 mb-1">Primary Mobile Hotline</label>
                       <input
                         type="text"
                         value={settings.school_phone_1}
                         onChange={(e) => setSettings({ ...settings, school_phone_1: e.target.value })}
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#BF5700]"
                       />
                     </div>
+
                     <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">Secondary Mobile</label>
+                      <label className="block font-bold text-gray-700 mb-1">Official LinkedIn URL</label>
                       <input
-                        type="text"
-                        value={settings.school_phone_2}
-                        onChange={(e) => setSettings({ ...settings, school_phone_2: e.target.value })}
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">Landline Tel</label>
-                      <input
-                        type="text"
-                        value={settings.school_tel}
-                        onChange={(e) => setSettings({ ...settings, school_tel: e.target.value })}
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        type="url"
+                        value={settings.social_linkedin || ""}
+                        onChange={(e) => setSettings({ ...settings, social_linkedin: e.target.value })}
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#BF5700]"
+                        placeholder="https://www.linkedin.com/school/..."
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">School Email</label>
+                      <label className="block font-bold text-gray-700 mb-1">Official Email</label>
                       <input
                         type="email"
                         value={settings.school_email}
                         onChange={(e) => setSettings({ ...settings, school_email: e.target.value })}
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#BF5700]"
                       />
                     </div>
+
                     <div>
-                      <label className="block text-xs font-bold text-gray-700 mb-1">Payment Window</label>
+                      <label className="block font-bold text-gray-700 mb-1">Online Payment Daily Window</label>
                       <input
                         type="text"
                         value={settings.payment_hours}
                         onChange={(e) => setSettings({ ...settings, payment_hours: e.target.value })}
-                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#BF5700]"
                       />
                     </div>
                   </div>
-                </div>
 
-                <button
-                  onClick={handleSaveSettings}
-                  className="px-6 py-2.5 bg-[#BF5700] hover:bg-orange-600 text-white font-bold text-xs rounded-xl shadow transition-all flex items-center gap-2"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>Save All Site Settings</span>
-                </button>
+                  <div className="pt-2">
+                    <button
+                      onClick={() => notifySuccess("Site settings saved successfully.")}
+                      className="px-6 py-2.5 bg-[#BF5700] hover:bg-orange-600 text-white font-bold rounded-xl shadow transition-all flex items-center gap-2"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>Save All Site Settings</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>

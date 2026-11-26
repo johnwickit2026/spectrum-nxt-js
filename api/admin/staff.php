@@ -39,17 +39,62 @@ try {
             $designation = sanitizeInput($data['designation'] ?? '');
             $department = sanitizeInput($data['department'] ?? 'General');
             $teamType = sanitizeInput($data['team_type'] ?? 'academic');
+            if ($teamType === 'non-academic') $teamType = 'admin';
+            $qualifications = sanitizeInput($data['qualifications'] ?? '');
+            $experience = sanitizeInput($data['experience'] ?? '');
             $bio = sanitizeInput($data['bio'] ?? '');
             $photo = sanitizeInput($data['photo_url'] ?? '/assets/IMG_2461.JPG.jpeg');
             $phone = sanitizeInput($data['phone'] ?? '');
             $email = sanitizeInput($data['email'] ?? '');
 
-            $stmt = $pdo->prepare("INSERT INTO staff (name, designation, department, team_type, bio, photo_url, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$name, $designation, $department, $teamType, $bio, $photo, $phone, $email]);
+            $stmt = $pdo->prepare("INSERT INTO staff (name, designation, department, team_type, qualifications, experience, bio, photo_url, phone, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$name, $designation, $department, $teamType, $qualifications, $experience, $bio, $photo, $phone, $email]);
             $newId = $pdo->lastInsertId();
 
-            logActivity('ADD_STAFF', "Added staff member: $name");
+            logActivity('ADD_STAFF', "Added staff member: $name ($teamType)");
             sendResponse(['success' => true, 'message' => 'Staff member added', 'id' => $newId]);
+        }
+    }
+
+    if ($method === 'PUT') {
+        $data = getJsonInput();
+        $id = intval($data['id'] ?? 0);
+        $isCommittee = !empty($data['committee_type']);
+
+        if ($id <= 0) {
+            sendError('Invalid member ID');
+        }
+
+        if ($isCommittee) {
+            $name = sanitizeInput($data['name'] ?? '');
+            $designation = sanitizeInput($data['designation'] ?? '');
+            $type = sanitizeInput($data['committee_type'] ?? 'management');
+            $photo = sanitizeInput($data['photo_url'] ?? '/assets/IMG_9993.JPG.jpeg');
+            $bio = sanitizeInput($data['bio'] ?? '');
+
+            $stmt = $pdo->prepare("UPDATE committees SET name = ?, designation = ?, committee_type = ?, photo_url = ?, bio = ? WHERE id = ?");
+            $stmt->execute([$name, $designation, $type, $photo, $bio, $id]);
+
+            logActivity('UPDATE_COMMITTEE_MEMBER', "Updated committee member: $name (ID: $id)");
+            sendResponse(['success' => true, 'message' => 'Committee member updated successfully']);
+        } else {
+            $name = sanitizeInput($data['name'] ?? '');
+            $designation = sanitizeInput($data['designation'] ?? '');
+            $department = sanitizeInput($data['department'] ?? 'General');
+            $teamType = sanitizeInput($data['team_type'] ?? 'academic');
+            if ($teamType === 'non-academic') $teamType = 'admin';
+            $qualifications = sanitizeInput($data['qualifications'] ?? '');
+            $experience = sanitizeInput($data['experience'] ?? '');
+            $bio = sanitizeInput($data['bio'] ?? '');
+            $photo = sanitizeInput($data['photo_url'] ?? '/assets/IMG_2461.JPG.jpeg');
+            $phone = sanitizeInput($data['phone'] ?? '');
+            $email = sanitizeInput($data['email'] ?? '');
+
+            $stmt = $pdo->prepare("UPDATE staff SET name = ?, designation = ?, department = ?, team_type = ?, qualifications = ?, experience = ?, bio = ?, photo_url = ?, phone = ?, email = ? WHERE id = ?");
+            $stmt->execute([$name, $designation, $department, $teamType, $qualifications, $experience, $bio, $photo, $phone, $email, $id]);
+
+            logActivity('UPDATE_STAFF', "Updated staff profile: $name (ID: $id)");
+            sendResponse(['success' => true, 'message' => 'Staff profile updated successfully']);
         }
     }
 

@@ -25,6 +25,7 @@ import {
 import { ASSETS } from "@/lib/assets";
 import { useGsapContext, gsap } from "@/lib/gsap";
 import AdmissionPopup from "@/components/AdmissionPopup";
+import ReflectiveCard from "@/components/ReflectiveCard";
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -190,35 +191,55 @@ export default function HomePage() {
 
           {/* Hero Feature Showcase Card */}
           <div className="lg:col-span-5 flex flex-col gap-4">
-            <div className="hero-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-2xl relative overflow-hidden">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#BF5700] flex items-center justify-center text-white shadow-md">
-                  <GraduationCap className="w-6 h-6" />
+            <ReflectiveCard
+              width="100%"
+              height="auto"
+              radius={20}
+              theme="dark"
+              metalness={0.92}
+              roughness={0.28}
+              glare={0.6}
+              shine={1.2}
+              className="hero-card !min-h-[170px]"
+            >
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-11 h-11 rounded-xl bg-[#BF5700] flex items-center justify-center text-white shadow-md flex-shrink-0">
+                  <GraduationCap className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Dual Academic Pathway</h3>
-                  <p className="text-xs text-gray-300">Pearson Edexcel & Cambridge International</p>
+                  <h3 className="text-base font-bold text-white">Dual Academic Pathway</h3>
+                  <p className="text-xs text-gray-300">Pearson Edexcel &amp; Cambridge International</p>
                 </div>
               </div>
-              <p className="text-xs text-gray-200 leading-relaxed">
+              <p className="text-xs text-gray-300 leading-relaxed">
                 Structured from Play Group to A-Levels, empowering students with critical thinking, advanced science experimentation, and mathematical mastery.
               </p>
-            </div>
+            </ReflectiveCard>
 
-            <div className="hero-card bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 shadow-2xl relative overflow-hidden">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-[#92278F] flex items-center justify-center text-white shadow-md">
-                  <ShieldCheck className="w-6 h-6" />
+            <ReflectiveCard
+              width="100%"
+              height="auto"
+              radius={20}
+              theme="dark"
+              metalness={0.92}
+              roughness={0.28}
+              glare={0.6}
+              shine={1.2}
+              className="hero-card !min-h-[170px]"
+            >
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-11 h-11 rounded-xl bg-[#92278F] flex items-center justify-center text-white shadow-md flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Tahfeezul Quran & Tarbiyah</h3>
-                  <p className="text-xs text-gray-300">Special Girls & Boys Hifz Sections</p>
+                  <h3 className="text-base font-bold text-white">Tahfeezul Quran &amp; Tarbiyah</h3>
+                  <p className="text-xs text-gray-300">Special Girls &amp; Boys Hifz Sections</p>
                 </div>
               </div>
-              <p className="text-xs text-gray-200 leading-relaxed">
+              <p className="text-xs text-gray-300 leading-relaxed">
                 Full Quran memorization with certified Qaris alongside modern academic schooling, fostering strong spiritual character and moral leadership.
               </p>
-            </div>
+            </ReflectiveCard>
           </div>
         </div>
       </section>
@@ -599,18 +620,27 @@ export default function HomePage() {
             <Quote className="absolute top-6 right-6 w-20 h-20 text-orange-200/50 pointer-events-none" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-4 flex flex-col items-center text-center">
-                <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-2xl overflow-hidden shadow-lg border-4 border-white mb-4">
-                  <Image
-                    src={ASSETS.people.founderCeo}
-                    alt="Founder & CEO - Spectrum International School"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <h4 className="text-lg font-extrabold text-[#171E45]">Nur Ahammed</h4>
-                <p className="text-xs font-semibold text-[#BF5700]">Founder & Chief Executive Officer</p>
-                <p className="text-[11px] text-gray-500 mt-1">Spectrum International School</p>
+              <div className="lg:col-span-4 flex justify-center py-2">
+                <ReflectiveCard
+                  name="Nur Ahammed"
+                  role="Founder & Chief Executive Officer"
+                  badge="Executive Leadership"
+                  status="Founder"
+                  statusColor="#BF5700"
+                  idLabel="Executive ID"
+                  idValue="SIS-EXEC-FOUNDER"
+                  avatar={ASSETS.people.founderCeo}
+                  theme="dark"
+                  metalness={0.95}
+                  roughness={0.25}
+                  blurStrength={6}
+                  shine={1.3}
+                  glare={0.7}
+                  width={290}
+                  height={440}
+                  radius={24}
+                  className="shadow-2xl"
+                />
               </div>
 
               <div className="lg:col-span-8 space-y-4">
@@ -819,7 +849,7 @@ export default function HomePage() {
                     Girls Hifz Department Quran Recitation Celebration
                   </h3>
                   <p className="text-xs text-gray-600 mt-2 line-clamp-2">
-                    Honoring our young Huffaz for exemplary dedication to Quran memorization and melodic Tajweed.
+                    Honoring our young Hifz students for exemplary dedication to Quran memorization and melodic Tajweed.
                   </p>
                 </div>
               </div>

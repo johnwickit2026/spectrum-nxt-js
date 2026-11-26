@@ -11,6 +11,7 @@ export default function ApplyPage() {
     gender: "Male",
     dob: "",
     applying_grade: "Play Group",
+    academic_session: "June to June Regular Session",
     preferred_campus: "Academic Campus 01 (Shantinagar Branch)",
     parent_name: "",
     email: "",
@@ -79,7 +80,7 @@ export default function ApplyPage() {
               </p>
             </div>
             <a
-              href="https://eximuseducation.com"
+              href="https://www.eximusedu.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#FC800A] hover:bg-orange-500 text-white font-bold text-xs rounded-xl shadow transition-all shrink-0"
@@ -172,7 +173,19 @@ export default function ApplyPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">Academic Session Cycle *</label>
+                    <select
+                      value={formData.academic_session}
+                      onChange={(e) => setFormData({ ...formData, academic_session: e.target.value })}
+                      className="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#BF5700]"
+                    >
+                      <option value="June to June Regular Session">June Session (June to June)</option>
+                      <option value="January to January Session">January Session (Jan to Jan)</option>
+                    </select>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-bold text-gray-700 mb-1">Preferred Campus Branch *</label>
                     <select

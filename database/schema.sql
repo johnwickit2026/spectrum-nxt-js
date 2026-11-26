@@ -13,12 +13,14 @@ DROP TABLE IF EXISTS contact_submissions;
 DROP TABLE IF EXISTS careers;
 DROP TABLE IF EXISTS committees;
 DROP TABLE IF EXISTS staff;
+DROP TABLE IF EXISTS facilities;
 DROP TABLE IF EXISTS video_gallery;
 DROP TABLE IF EXISTS gallery_images;
 DROP TABLE IF EXISTS gallery_albums;
 DROP TABLE IF EXISTS galleries;
 DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS notices;
+DROP TABLE IF EXISTS academic_sessions;
 DROP TABLE IF EXISTS notice_categories;
 DROP TABLE IF EXISTS blogs;
 DROP TABLE IF EXISTS blog_categories;
@@ -112,30 +114,51 @@ CREATE TABLE notice_categories (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 8. Notices
+-- 8. Academic Sessions (June & January cycles)
+CREATE TABLE academic_sessions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    session_type ENUM('june', 'january') NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    status ENUM('active', 'upcoming', 'completed', 'archived') NOT NULL DEFAULT 'active',
+    is_current TINYINT(1) DEFAULT 0,
+    description TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 9. Notices
 CREATE TABLE notices (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     category_id INT NOT NULL,
+    session_id INT NULL,
     file_url VARCHAR(255) NULL,
     content LONGTEXT NOT NULL,
     publish_date DATE NOT NULL,
     is_active TINYINT(1) DEFAULT 1,
+    is_published TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES notice_categories(id) ON DELETE RESTRICT
+    FOREIGN KEY (category_id) REFERENCES notice_categories(id) ON DELETE RESTRICT,
+    FOREIGN KEY (session_id) REFERENCES academic_sessions(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 9. Events
+-- 10. Events
 CREATE TABLE events (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
+    category VARCHAR(100) NOT NULL DEFAULT 'General',
     event_date DATE NOT NULL,
     event_time VARCHAR(100) DEFAULT '09:00 AM - 01:00 PM',
-    location VARCHAR(200) DEFAULT 'Spectrum International School Campus',
+    location VARCHAR(200) DEFAULT 'Spectrum International School Campus, Shantinagar',
+    gallery_album_id INT NULL,
     excerpt TEXT NOT NULL,
     content LONGTEXT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
+    images JSON NULL,
     is_featured TINYINT(1) DEFAULT 0,
+    is_published TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -182,22 +205,40 @@ CREATE TABLE video_gallery (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 14. Staff
+-- 14. Facilities, Clubs & ECA
+CREATE TABLE facilities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category ENUM('lab', 'club', 'eca') NOT NULL,
+    subcategory VARCHAR(100) NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    slug VARCHAR(150) NOT NULL UNIQUE,
+    description LONGTEXT NOT NULL,
+    cover_image VARCHAR(255) NOT NULL,
+    gallery_images JSON NULL,
+    sort_order INT DEFAULT 0,
+    is_published TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 15. Staff
 CREATE TABLE staff (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
     designation VARCHAR(150) NOT NULL,
     department VARCHAR(100) NOT NULL,
-    team_type ENUM('academic', 'non-academic', 'support') NOT NULL DEFAULT 'academic',
+    team_type ENUM('academic', 'admin', 'support') NOT NULL DEFAULT 'academic',
+    qualifications TEXT NULL,
+    experience TEXT NULL,
     bio TEXT NULL,
     photo_url VARCHAR(255) NOT NULL,
     phone VARCHAR(50) NULL,
-    email VARCHAR(100) NULL,
+    email VARCHAR(150) NULL,
     sort_order INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 15. Committees
+-- 16. Committees
 CREATE TABLE committees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
@@ -222,7 +263,23 @@ CREATE TABLE careers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 17. Contact Submissions
+-- 17. Job Applications
+CREATE TABLE job_applications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    career_id INT NULL,
+    job_title VARCHAR(200) NOT NULL,
+    applicant_name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
+    linkedin VARCHAR(255) NULL,
+    cover_note LONGTEXT NULL,
+    resume_path VARCHAR(255) NULL,
+    status ENUM('pending', 'reviewed', 'shortlisted', 'rejected') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (career_id) REFERENCES careers(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 18. Contact Submissions
 CREATE TABLE contact_submissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,

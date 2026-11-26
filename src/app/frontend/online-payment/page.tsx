@@ -34,7 +34,7 @@ export default function OnlinePaymentPage() {
             </div>
 
             <a
-              href="https://eximuseducation.com"
+              href="https://www.eximusedu.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3.5 bg-white text-[#BF5700] hover:bg-orange-50 font-bold text-xs rounded-xl shadow-lg transition-all flex items-center gap-2 shrink-0"

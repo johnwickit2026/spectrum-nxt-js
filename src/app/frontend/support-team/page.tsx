@@ -1,5 +1,5 @@
-import Image from "next/image";
 import PageBanner from "@/components/PageBanner";
+import ReflectiveCard from "@/components/ReflectiveCard";
 import { ASSETS } from "@/lib/assets";
 import { Heart } from "lucide-react";
 
@@ -60,33 +60,29 @@ export default function SupportTeamPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
             {supportStaff.map((staff, i) => (
-              <div
+              <ReflectiveCard
                 key={i}
-                className="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-green-300 shadow-sm transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative h-44 rounded-xl overflow-hidden shadow-sm mb-4 border border-gray-200/50">
-                    <Image
-                      src={staff.image}
-                      alt={staff.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <span className="text-[10px] font-bold text-[#8AB326] uppercase tracking-wider bg-green-100 px-2 py-0.5 rounded">
-                    {staff.department}
-                  </span>
-                  <h3 className="text-sm font-bold text-[#171E45] mt-2 line-clamp-1">{staff.name}</h3>
-                  <p className="text-xs font-semibold text-gray-700 mt-0.5 leading-snug">{staff.role}</p>
-                </div>
-
-                <div className="pt-3 border-t border-gray-200/60 mt-4 text-[11px] text-gray-500 flex items-center gap-1.5">
-                  <Heart className="w-3.5 h-3.5 text-[#8AB326]" />
-                  <span>Support Services</span>
-                </div>
-              </div>
+                name={staff.name}
+                role={staff.role}
+                badge={staff.department}
+                status="Support"
+                statusColor="#8AB326"
+                idLabel="Campus Staff ID"
+                idValue={`SIS-SUP-${String(i + 1).padStart(3, "0")}`}
+                avatar={staff.image}
+                theme="dark"
+                metalness={0.9}
+                roughness={0.3}
+                blurStrength={6}
+                shine={1.2}
+                glare={0.6}
+                width={290}
+                height={440}
+                radius={22}
+                className="shadow-2xl"
+              />
             ))}
           </div>
 

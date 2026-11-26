@@ -30,7 +30,7 @@ export default function Header() {
         { label: "Sharia Committee", href: "/frontend/sharia" },
         { label: "Academic Head", href: "/frontend/head" },
         { label: "Academic Team", href: "/frontend/academic-team" },
-        { label: "Non Academic Team", href: "/frontend/non-academic-team" },
+        { label: "Admin Team", href: "/frontend/admin-team" },
         { label: "Support Team", href: "/frontend/support-team" },
         { label: "Recognition in Details", href: "/frontend/recognition" },
         { label: "School Notices", href: "/frontend/notices" },
@@ -43,11 +43,11 @@ export default function Header() {
     {
       name: "Our Projects",
       dropdown: [
-        { label: "Spectrum EduCare", href: "/frontend/educare" },
-        { label: "Senior Citizen Care Home", href: "/frontend/senior-care" },
+        { label: "Spectrum EduCare", href: "https://spectrumeducareltd.com/" },
+        { label: "Senior Citizen Care Home", href: "https://yellowgreen-alligator-946551.hostingersite.com/" },
         {
           label: "School of Integrated Thoughts",
-          href: "https://integratedthoughts.netlify.app",
+          href: "https://sitinstitute.org/",
           isExternal: true,
         },
       ],
@@ -55,28 +55,30 @@ export default function Header() {
     {
       name: "School Facilities",
       dropdown: [
+        { label: "Campus Facilities & Infrastructure", href: "/frontend/campus-facilities" },
         { label: "Academic Curriculum", href: "/frontend/curriculum" },
-        { label: "Campus Facilities", href: "/frontend/campus-facilities" },
         { label: "Modern Library", href: "/frontend/library" },
-        { label: "ICT & Computer Lab", href: "/frontend/ict-lab" },
-        { label: "Science Laboratories", href: "/frontend/science-lab" },
-        { label: "Sports & Athletics Club", href: "/frontend/sports-club" },
-        { label: "Language Club", href: "/frontend/language-club" },
-        { label: "Study Tour & Field Trip", href: "/frontend/study-tour" },
+        { label: "Lab Facilities: Science Lab", href: "/frontend/science-lab" },
+        { label: "Lab Facilities: Computer Lab", href: "/frontend/computer-lab" },
+        { label: "Club Facilities: Overview & Hub", href: "/frontend/club-facilities" },
+        { label: "Club Facilities: Sports Club", href: "/frontend/sports-club" },
+        { label: "Club Facilities: Language Club", href: "/frontend/language-club" },
+        { label: "ECA: Study Tours", href: "/frontend/study-tour" },
+        { label: "ECA: Field Trips", href: "/frontend/field-trip" },
       ],
     },
     {
       name: "Admission",
       dropdown: [
         { label: "Prospectus Overview & PDF", href: "/frontend/prospectus" },
-        { label: "Academic Sessions", href: "/frontend/academic-sessions" },
+        { label: "Academic Sessions (June & Jan)", href: "/frontend/academic-sessions" },
         { label: "Admission Procedures", href: "/frontend/admission-procedures" },
         { label: "Get Started / Apply Online", href: "/frontend/apply" },
         { label: "Online Payment Guide", href: "/frontend/online-payment" },
         { label: "Waiver & Financial Aid", href: "/frontend/waiver" },
         {
           label: "Eximus Admission Form",
-          href: "https://eximuseducation.com",
+          href: "https://www.eximusedu.com/",
           isExternal: true,
         },
       ],
@@ -86,7 +88,7 @@ export default function Header() {
       dropdown: [
         { label: "Blogs & Articles", href: "/frontend/blogs" },
         { label: "Photo Gallery", href: "/frontend/photo-gallery" },
-        { label: "Video Gallery", href: "/frontend/video-gallery" },
+        { label: "Spectrum TV", href: "/frontend/spectrum-tv" },
         { label: "Events & Calendar", href: "/frontend/events" },
         { label: "Career at SIS", href: "/frontend/career" },
       ],
@@ -96,17 +98,17 @@ export default function Header() {
       dropdown: [
         {
           label: "Management Login",
-          href: "https://eximuseducation.com/login",
+          href: "https://www.eximusedu.com/",
           isExternal: true,
         },
         {
           label: "Teachers & Employee Login",
-          href: "https://eximuseducation.com/login",
+          href: "https://www.eximusedu.com/",
           isExternal: true,
         },
         {
           label: "Student Portal Login",
-          href: "https://eximuseducation.com/login",
+          href: "https://www.eximusedu.com/",
           isExternal: true,
         },
       ],
@@ -115,11 +117,10 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-white/95 backdrop-blur-md shadow-md py-2.5"
           : "bg-white border-b border-gray-100 py-3.5"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
@@ -169,11 +170,10 @@ export default function Header() {
 
                 {/* Dropdown Menu */}
                 <div
-                  className={`absolute left-0 top-full pt-2 w-64 transition-all duration-200 ${
-                    activeDropdown === group.name
+                  className={`absolute left-0 top-full pt-2 w-64 transition-all duration-200 ${activeDropdown === group.name
                       ? "opacity-100 visible translate-y-0"
                       : "opacity-0 invisible translate-y-1 pointer-events-none"
-                  }`}
+                    }`}
                 >
                   <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-2 max-h-[80vh] overflow-y-auto">
                     {group.dropdown.map((subItem) => {

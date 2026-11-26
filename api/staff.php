@@ -4,6 +4,9 @@ setCorsHeaders();
 
 $pdo = Database::getConnection();
 $teamType = sanitizeInput($_GET['type'] ?? '');
+if ($teamType === 'non-academic') {
+    $teamType = 'admin';
+}
 $committee = sanitizeInput($_GET['committee'] ?? '');
 
 $fallbackStaff = [
@@ -13,8 +16,10 @@ $fallbackStaff = [
         'designation' => 'Founder & CEO',
         'department' => 'Executive Leadership',
         'team_type' => 'academic',
+        'qualifications' => 'M.Sc, Cambridge Leadership Certified',
+        'experience' => '15+ Years in International School Governance',
         'bio' => 'Founder & CEO driving academic vision, institutional excellence, and holistic Cambridge-Islamic education at Spectrum International School.',
-        'photo_url' => '/assets/IMG_9993.JPG.jpeg',
+        'photo_url' => '/images/CEO SIR NEW - Copy.png',
         'phone' => '+880 1799-369685',
         'email' => 'spectrumintlschool@gmail.com'
     ],
@@ -24,6 +29,8 @@ $fallbackStaff = [
         'designation' => 'Vice Principal & Academic Head',
         'department' => 'Academic Leadership',
         'team_type' => 'academic',
+        'qualifications' => 'MA in English, British Council Teacher Trainer Certified',
+        'experience' => '12+ Years in Cambridge & Pearson Curriculum Delivery',
         'bio' => 'Vice Principal & Academic Head overseeing curriculum implementation, pedagogical standards, and student mentoring.',
         'photo_url' => '/assets/IMG_2461.JPG.jpeg',
         'phone' => '+880 1799-369685',
@@ -35,6 +42,8 @@ $fallbackStaff = [
         'designation' => 'Scholar & Head of Arabic',
         'department' => 'Islamic Studies & Arabic',
         'team_type' => 'academic',
+        'qualifications' => 'Kamil Hadith, Certified Qari (Makharij & Tajweed)',
+        'experience' => '10+ Years in Hifzul Quran & Arabic Linguistics',
         'bio' => 'Scholar directing Arabic language studies, Quranic understanding, and moral character education.',
         'photo_url' => '/assets/IMG_9469.JPG.jpeg',
         'phone' => '+880 1799-369685',
@@ -45,7 +54,9 @@ $fallbackStaff = [
         'name' => 'Shah Alamgir',
         'designation' => 'Director of Finance',
         'department' => 'Finance & Accounts',
-        'team_type' => 'non-academic',
+        'team_type' => 'admin',
+        'qualifications' => 'M.Com, Certified Management Accountant',
+        'experience' => '14+ Years Corporate & Institutional Financial Auditing',
         'bio' => 'Directing institutional financial planning, fiscal management, and resource allocation.',
         'photo_url' => '/assets/IMG_9917.JPG.jpeg',
         'phone' => '+880 1730-369686',
@@ -56,7 +67,9 @@ $fallbackStaff = [
         'name' => 'Tanbir Md. Ali Foysal',
         'designation' => 'Head of Admin',
         'department' => 'Administration',
-        'team_type' => 'non-academic',
+        'team_type' => 'admin',
+        'qualifications' => 'MBA in Human Resource Management',
+        'experience' => '9+ Years in Educational Administration & Operations',
         'bio' => 'Leading campus administration, operations, facilities, and student services.',
         'photo_url' => '/assets/IMG_9917.JPG.jpeg',
         'phone' => '+880 1730-369686',
@@ -68,6 +81,8 @@ $fallbackStaff = [
         'designation' => 'Security In charge',
         'department' => 'Campus Safety & Logistics',
         'team_type' => 'support',
+        'qualifications' => 'Certified Fire Safety Officer, Ex-Defense Security Personnel',
+        'experience' => '8+ Years Campus Perimeter & Surveillance Management',
         'bio' => 'In charge of campus safety, security checkpoints, and student transportation protocols.',
         'photo_url' => '/assets/IMG_9917.JPG.jpeg',
         'phone' => '+880 1730-369686',
@@ -81,7 +96,7 @@ $fallbackCommittees = [
         'name' => 'Nur Ahammed Khokan',
         'designation' => 'Founder & CEO',
         'committee_type' => 'management',
-        'photo_url' => '/assets/IMG_9993.JPG.jpeg',
+        'photo_url' => '/images/CEO SIR NEW - Copy.png',
         'bio' => 'Founder & CEO driving strategic institutional direction, capital infrastructure planning, and board governance.'
     ],
     [

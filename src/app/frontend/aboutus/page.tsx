@@ -75,7 +75,7 @@ export default function AboutUsPage() {
                 </div>
                 <div className="p-3.5 bg-[#FBF1E3] rounded-xl border border-[#EBE8E2] text-center">
                   <p className="text-2xl font-black text-[#92278F]">8</p>
-                  <p className="text-[11px] text-gray-600 font-medium mt-0.5">Completed Huffaz</p>
+                  <p className="text-[11px] text-gray-600 font-medium mt-0.5">Completed Hifz</p>
                 </div>
                 <div className="p-3.5 bg-[#FBF1E3] rounded-xl border border-[#EBE8E2] text-center">
                   <p className="text-2xl font-black text-[#8AB326]">4</p>

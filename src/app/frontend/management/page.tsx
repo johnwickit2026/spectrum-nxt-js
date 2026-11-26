@@ -1,7 +1,7 @@
-import Image from "next/image";
 import PageBanner from "@/components/PageBanner";
+import ReflectiveCard from "@/components/ReflectiveCard";
 import { ASSETS } from "@/lib/assets";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Sparkles } from "lucide-react";
 
 export const metadata = {
   title: "Management Committee | Spectrum International School",
@@ -72,30 +72,29 @@ export default function ManagementPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {committeeMembers.map((member, i) => (
-              <div
+              <ReflectiveCard
                 key={i}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-orange-300 shadow-sm transition-all text-center flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative w-36 h-36 mx-auto rounded-xl overflow-hidden shadow-md mb-4 border-2 border-white">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h3 className="text-base font-bold text-[#171E45]">{member.name}</h3>
-                  <p className="text-xs font-bold text-[#BF5700] mt-1">{member.role}</p>
-                  <p className="text-xs text-gray-600 mt-3 leading-relaxed">{member.bio}</p>
-                </div>
-                <div className="pt-4 border-t border-gray-200/60 mt-4 text-[11px] text-gray-500 font-medium flex items-center justify-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#8AB326]" />
-                  <span>Verified SIS Trustee</span>
-                </div>
-              </div>
+                name={member.name}
+                role={member.role}
+                badge="Trustee Board"
+                status="Governing Body"
+                statusColor="#BF5700"
+                idLabel="Trustee Protocol"
+                idValue={`SIS-EXEC-00${i + 1}`}
+                avatar={member.image}
+                theme="dark"
+                metalness={0.95}
+                roughness={0.25}
+                blurStrength={6}
+                shine={1.3}
+                glare={0.7}
+                width={320}
+                height={460}
+                radius={24}
+                className="shadow-2xl"
+              />
             ))}
           </div>
 

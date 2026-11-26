@@ -3,7 +3,29 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 
 function setCorsHeaders() {
-    header("Access-Control-Allow-Origin: *");
+    $allowedOrigins = [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'https://spectrumintlschool.com',
+        'https://www.spectrumintlschool.com',
+        'https://parallel-goldenrod-hare-45.hostingersite.com'
+    ];
+
+    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+    if (in_array($origin, $allowedOrigins, true)) {
+        header("Access-Control-Allow-Origin: " . $origin);
+    } else if (!empty($origin)) {
+        // Allow origin matching *.hostingersite.com or localhost
+        if (preg_match('/^https?:\/\/(localhost|127\.0\.0\.1|.*\.hostingersite\.com)(:\d+)?$/i', $origin)) {
+            header("Access-Control-Allow-Origin: " . $origin);
+        } else {
+            header("Access-Control-Allow-Origin: https://spectrumintlschool.com");
+        }
+    } else {
+        header("Access-Control-Allow-Origin: *");
+    }
+
+    header("Access-Control-Allow-Credentials: true");
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
     header("Content-Type: application/json; charset=UTF-8");
@@ -47,19 +69,23 @@ function sanitizeInput($data) {
 }
 
 function requireAdminAuth() {
-    if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-        // Also check Authorization header token for API clients
-        $headers = getallheaders();
-        $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
-        if (preg_match('/Bearer\s+(.*)$/i', $authHeader, $matches)) {
-            $token = $matches[1];
-            if (isset($_SESSION['admin_token']) && hash_equals($_SESSION['admin_token'], $token)) {
-                return true;
-            }
+    // Check Authorization header token for API clients
+    $headers = getallheaders();
+    $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    
+    if (preg_match('/Bearer\s+(.+)$/i', $authHeader, $matches)) {
+        $token = trim($matches[1]);
+        if (isset($_SESSION['admin_token']) && hash_equals($_SESSION['admin_token'], $token)) {
+            return true;
         }
-        sendError('Unauthorized access. Please login.', 401);
     }
-    return true;
+
+    // Also check native session state
+    if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+        return true;
+    }
+
+    sendError('Unauthorized access. Please login.', 401);
 }
 
 function logActivity($action, $details = '') {

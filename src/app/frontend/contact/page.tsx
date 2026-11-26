@@ -3,7 +3,7 @@
 import { useState } from "react";
 import PageBanner from "@/components/PageBanner";
 import { ASSETS } from "@/lib/assets";
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle, Building2, Facebook, Instagram, Youtube, Globe } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle, Building2, Facebook, Instagram, Youtube, Globe, Linkedin, ExternalLink } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -141,7 +141,7 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-[#FC800A] shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-bold text-white">Central Campus Address</p>
+                      <p className="font-bold text-white">Shantinagar Campus (Campus 01)</p>
                       <p className="text-gray-300">41/1, Shantinagar, Dhaka, Bangladesh</p>
                     </div>
                   </div>
@@ -202,22 +202,31 @@ export default function ContactPage() {
                       <span>Instagram</span>
                     </a>
                     <a
+                      href="https://www.linkedin.com/school/spectrum-international-school-bd"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg flex items-center gap-1.5 transition-colors"
+                    >
+                      <Linkedin className="w-3.5 h-3.5 text-[#0A66C2]" />
+                      <span>LinkedIn</span>
+                    </a>
+                    <a
                       href="https://youtube.com/@SpectrumTVBD"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg flex items-center gap-1.5 transition-colors"
                     >
                       <Youtube className="w-3.5 h-3.5 text-red-400" />
-                      <span>Spectrum TV BD</span>
+                      <span>Spectrum TV</span>
                     </a>
                   </div>
                 </div>
               </div>
 
-              {/* Map Container */}
-              <div className="rounded-3xl overflow-hidden shadow-card border border-gray-200 h-64 bg-gray-200 relative">
+              {/* Map Container - Bigger and responsive */}
+              <div className="rounded-3xl overflow-hidden shadow-card border border-gray-200 h-80 sm:h-96 bg-gray-200 relative group">
                 <iframe
-                  title="Spectrum International School Location"
+                  title="Spectrum International School Shantinagar Campus Location"
                   src="https://maps.google.com/maps?q=41/1+Shantinagar,+Dhaka&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
@@ -225,6 +234,15 @@ export default function ContactPage() {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
+                <a
+                  href="https://maps.google.com/maps?q=41/1+Shantinagar,+Dhaka"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 right-3 bg-[#171E45]/90 hover:bg-[#171E45] text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-lg flex items-center gap-1.5 backdrop-blur-sm transition-all"
+                >
+                  <span>Open Full Map</span>
+                  <ExternalLink className="w-3 h-3 text-[#FC800A]" />
+                </a>
               </div>
             </div>
 

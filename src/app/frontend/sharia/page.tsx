@@ -1,5 +1,5 @@
-import Image from "next/image";
 import PageBanner from "@/components/PageBanner";
+import ReflectiveCard from "@/components/ReflectiveCard";
 import { ASSETS } from "@/lib/assets";
 import { ShieldCheck, BookOpen, UserCheck } from "lucide-react";
 
@@ -86,30 +86,29 @@ export default function ShariaPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto justify-items-center">
               {shariaSupervisoryCommittee.map((member, i) => (
-                <div
+                <ReflectiveCard
                   key={i}
-                  className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm text-center flex flex-col justify-between hover:border-green-300 transition-all"
-                >
-                  <div>
-                    <div className="relative w-36 h-36 mx-auto rounded-xl overflow-hidden shadow-md mb-4 border-2 border-white">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <h3 className="text-lg font-bold text-[#171E45]">{member.name}</h3>
-                    <p className="text-xs font-bold text-[#8AB326] mt-1">{member.role}</p>
-                    <p className="text-xs text-gray-600 mt-3 leading-relaxed">{member.bio}</p>
-                  </div>
-                  <div className="pt-4 border-t border-gray-200/60 mt-4 text-[11px] text-gray-500 font-medium flex items-center justify-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#8AB326]" />
-                    <span>Shariah Supervisory Committee</span>
-                  </div>
-                </div>
+                  name={member.name}
+                  role={member.role}
+                  badge="Shariah Board"
+                  status="Supervisory"
+                  statusColor="#8AB326"
+                  idLabel="Shariah Protocol"
+                  idValue={`SIS-SHAR-00${i + 1}`}
+                  avatar={member.image}
+                  theme="dark"
+                  metalness={0.92}
+                  roughness={0.28}
+                  blurStrength={6}
+                  shine={1.2}
+                  glare={0.65}
+                  width={310}
+                  height={450}
+                  radius={24}
+                  className="shadow-2xl"
+                />
               ))}
             </div>
           </div>
@@ -128,30 +127,29 @@ export default function ShariaPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
               {residentIslamicFaculty.map((sch, i) => (
-                <div
+                <ReflectiveCard
                   key={i}
-                  className="bg-gray-50 rounded-2xl p-5 border border-gray-100 shadow-sm text-center flex flex-col justify-between hover:border-orange-300 transition-all"
-                >
-                  <div>
-                    <div className="relative w-32 h-32 mx-auto rounded-xl overflow-hidden shadow-sm mb-4 border-2 border-white">
-                      <Image
-                        src={sch.image}
-                        alt={sch.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <h4 className="text-sm font-bold text-[#171E45] line-clamp-1">{sch.name}</h4>
-                    <p className="text-[11px] font-bold text-[#BF5700] mt-1 leading-snug">{sch.role}</p>
-                    <p className="text-xs text-gray-600 mt-2 leading-relaxed">{sch.bio}</p>
-                  </div>
-                  <div className="pt-3 border-t border-gray-200/60 mt-4 text-[11px] text-gray-500 font-medium flex items-center justify-center gap-1.5">
-                    <BookOpen className="w-3.5 h-3.5 text-[#92278F]" />
-                    <span>Resident Islamic Scholar</span>
-                  </div>
-                </div>
+                  name={sch.name}
+                  role={sch.role}
+                  badge="Islamic Scholar"
+                  status="Resident"
+                  statusColor="#BF5700"
+                  idLabel="Faculty Roster"
+                  idValue={`SIS-ISLAM-00${i + 1}`}
+                  avatar={sch.image}
+                  theme="dark"
+                  metalness={0.9}
+                  roughness={0.3}
+                  blurStrength={6}
+                  shine={1.2}
+                  glare={0.6}
+                  width={280}
+                  height={440}
+                  radius={22}
+                  className="shadow-2xl"
+                />
               ))}
             </div>
           </div>

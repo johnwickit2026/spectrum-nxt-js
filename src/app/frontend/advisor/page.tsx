@@ -1,5 +1,5 @@
-import Image from "next/image";
 import PageBanner from "@/components/PageBanner";
+import ReflectiveCard from "@/components/ReflectiveCard";
 import { ASSETS } from "@/lib/assets";
 import { Award, BookOpen } from "lucide-react";
 
@@ -54,30 +54,29 @@ export default function AdvisorPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
             {advisors.map((adv, i) => (
-              <div
+              <ReflectiveCard
                 key={i}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm text-center flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative w-36 h-36 mx-auto rounded-xl overflow-hidden shadow-md mb-4 border-2 border-white">
-                    <Image
-                      src={adv.image}
-                      alt={adv.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h3 className="text-lg font-bold text-[#171E45]">{adv.name}</h3>
-                  <p className="text-xs font-bold text-[#92278F] mt-1">{adv.role}</p>
-                  <p className="text-xs text-gray-600 mt-3 leading-relaxed">{adv.bio}</p>
-                </div>
-                <div className="pt-4 border-t border-gray-200/60 mt-4 text-[11px] text-gray-500 font-medium flex items-center justify-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-[#92278F]" />
-                  <span>Academic Consultant</span>
-                </div>
-              </div>
+                name={adv.name}
+                role={adv.role}
+                badge="Advisory Council"
+                status="Distinguished"
+                statusColor="#92278F"
+                idLabel="Advisory Seal"
+                idValue={`SIS-ADV-00${i + 1}`}
+                avatar={adv.image}
+                theme="dark"
+                metalness={0.9}
+                roughness={0.3}
+                blurStrength={6}
+                shine={1.2}
+                glare={0.6}
+                width={320}
+                height={460}
+                radius={24}
+                className="shadow-2xl"
+              />
             ))}
           </div>
 

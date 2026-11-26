@@ -31,18 +31,23 @@ export interface Notice {
   content: string;
   publish_date: string;
   is_active: number;
+  session_id?: number | null;
 }
 
 export interface EventItem {
   id: number;
   title: string;
+  category?: string;
   event_date: string;
   event_time: string;
   location: string;
+  gallery_album_id?: number | null;
   excerpt: string;
   content: string;
   image_url: string;
+  images?: string[];
   is_featured: number;
+  is_published?: number;
 }
 
 export interface BlogPost {
@@ -82,7 +87,9 @@ export interface StaffMember {
   name: string;
   designation: string;
   department: string;
-  team_type: 'academic' | 'non-academic' | 'support';
+  team_type: 'academic' | 'admin' | 'support' | 'non-academic';
+  qualifications?: string;
+  experience?: string;
   bio?: string;
   photo_url: string;
   phone?: string;
@@ -109,6 +116,58 @@ export interface CareerItem {
   requirements: string;
   responsibilities: string;
   is_active: number;
+}
+
+export interface JobApplication {
+  id: number;
+  career_id?: number | null;
+  job_title: string;
+  applicant_name: string;
+  email: string;
+  phone: string;
+  linkedin?: string;
+  cover_note?: string;
+  resume_path?: string;
+  status: 'pending' | 'reviewed' | 'shortlisted' | 'rejected';
+  created_at: string;
+}
+
+export interface AcademicSession {
+  id: number;
+  name: string;
+  session_type: 'june' | 'january';
+  start_date: string;
+  end_date: string;
+  status: 'active' | 'upcoming' | 'completed' | 'archived';
+  is_current: number;
+  description?: string;
+}
+
+export interface FacilityItem {
+  id: number;
+  category: 'lab' | 'club' | 'eca';
+  subcategory: string;
+  title: string;
+  slug: string;
+  description: string;
+  cover_image: string;
+  gallery_images?: string[];
+  sort_order?: number;
+  is_published: number;
+}
+
+export interface PageSection {
+  id?: number;
+  page_id?: number;
+  page_slug?: string;
+  section_key: string;
+  title?: string;
+  subtitle?: string;
+  content?: string;
+  image_url?: string;
+  extra_json?: any;
+  sort_order?: number;
+  is_published?: number;
 }
 
 export interface ContactSubmission {
@@ -143,15 +202,5 @@ export interface FeedbackSubmission {
   category: string;
   message: string;
   is_reviewed: number;
-  created_at: string;
-}
-
-export interface ActivityLog {
-  id: number;
-  admin_id?: number;
-  admin_name: string;
-  action: string;
-  details: string;
-  ip_address: string;
   created_at: string;
 }

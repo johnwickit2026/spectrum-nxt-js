@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     sendError('Method not allowed', 405);
 }
 
-// Simple session-based rate limiting (5 attempts in 15 minutes)
+// Session-based rate limiting (5 attempts in 15 minutes)
 $now = time();
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
@@ -28,32 +28,8 @@ if (empty($username) || empty($password)) {
 
 $pdo = Database::getConnection();
 
-// Fallback admin check if DB is not connected yet (Default: superadmin / Admin@SIS2026)
 if (!$pdo) {
-    if ($username === 'superadmin' && $password === 'Admin@SIS2026') {
-        $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_id'] = 1;
-        $_SESSION['admin_name'] = 'SIS Super Administrator';
-        $_SESSION['admin_role'] = 'Super Admin';
-        $token = bin2hex(random_bytes(32));
-        $_SESSION['admin_token'] = $token;
-
-        $_SESSION['login_attempts'] = 0;
-        sendResponse([
-            'success' => true,
-            'message' => 'Logged in successfully (fallback mode).',
-            'token' => $token,
-            'user' => [
-                'id' => 1,
-                'name' => 'SIS Super Administrator',
-                'username' => 'superadmin',
-                'role' => 'Super Admin'
-            ]
-        ]);
-    } else {
-        $_SESSION['login_attempts']++;
-        sendError('Invalid username or password.', 401);
-    }
+    sendError('Database connection error. Please contact the administrator.', 503);
 }
 
 try {
@@ -61,28 +37,28 @@ try {
     $stmt->execute([$username, $username]);
     $admin = $stmt->fetch();
 
-    // Check fallback password or password_verify
     $authenticated = false;
     if ($admin && password_verify($password, $admin['password_hash'])) {
-        $authenticated = true;
-    } else if ($username === 'superadmin' && $password === 'Admin@SIS2026') {
         $authenticated = true;
     }
 
     if ($authenticated) {
+        // Regenerate session id to protect against session fixation
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_regenerate_id(true);
+        }
+
         $_SESSION['admin_logged_in'] = true;
-        $_SESSION['admin_id'] = $admin ? $admin['id'] : 1;
-        $_SESSION['admin_name'] = $admin ? $admin['full_name'] : 'SIS Chief Administrator';
-        $_SESSION['admin_role'] = $admin ? $admin['role_name'] : 'Super Admin';
+        $_SESSION['admin_id'] = $admin['id'];
+        $_SESSION['admin_name'] = $admin['full_name'];
+        $_SESSION['admin_role'] = $admin['role_name'];
         $token = bin2hex(random_bytes(32));
         $_SESSION['admin_token'] = $token;
         $_SESSION['login_attempts'] = 0;
 
         // Update last login
-        if ($admin) {
-            $upd = $pdo->prepare("UPDATE admins SET last_login = NOW() WHERE id = ?");
-            $upd->execute([$admin['id']]);
-        }
+        $upd = $pdo->prepare("UPDATE admins SET last_login = NOW() WHERE id = ?");
+        $upd->execute([$admin['id']]);
 
         logActivity('ADMIN_LOGIN', 'Administrator logged in successfully.');
 
@@ -91,17 +67,16 @@ try {
             'message' => 'Logged in successfully.',
             'token' => $token,
             'user' => [
-                'id' => $admin ? $admin['id'] : 1,
-                'name' => $admin ? $admin['full_name'] : 'SIS Chief Administrator',
-                'username' => $admin ? $admin['username'] : 'superadmin',
-                'role' => $admin ? $admin['role_name'] : 'Super Admin'
+                'id' => $admin['id'],
+                'name' => $admin['full_name'],
+                'username' => $admin['username'],
+                'role' => $admin['role_name']
             ]
         ]);
     } else {
         $_SESSION['login_attempts']++;
-        logActivity('LOGIN_FAILED', "Failed login attempt for username: $username");
         sendError('Invalid username or password.', 401);
     }
 } catch (Exception $e) {
-    sendError('Authentication server error: ' . $e->getMessage(), 500);
+    sendError('Login error: ' . $e->getMessage(), 500);
 }

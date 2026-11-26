@@ -45,7 +45,7 @@ export const ASSETS = {
     recognition: "/assets/IMG_9965.JPG.jpeg",
   },
   people: {
-    founderCeo: "/assets/IMG_9993.JPG.jpeg",
+    founderCeo: "/images/CEO SIR NEW - Copy.png",
     faculty: "/assets/IMG_2461.JPG.jpeg",
     teachersStaff: "/assets/IMG_9917.JPG.jpeg",
     studentsUniform: "/assets/IMG_2516.JPG.jpeg",
